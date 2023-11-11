@@ -1,0 +1,588 @@
+.flex-item a {
+    height: 60%;
+    width: 90%;
+}
+
+.marco {
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border: #f2460b solid 1px;
+}
+
+body {
+    background-color: #ddd;
+    margin: 0;
+    padding: 0;
+    font-family: "Glacial Indifference";
+    height: 100svh;
+
+}
+
+#precios {
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    position: relative;
+}
+
+.caja {
+    background-color: #FEA500;
+    border: 3px solid #4D9906;
+    border-radius: 20px;
+}
+
+
+.contenedor-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 110%;
+    min-height: 100vh;
+    max-height: calc(100svh + 4.4vw);
+}
+
+header.producto {
+    font-size: 15px;
+}
+
+.flex-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flex-item {
+    position: relative;
+    height: 280px;
+    width: 280px;
+    background-color: lightgray;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 2px solid #4D9906;
+
+    transition: transform 0.2s;
+    -webkit-animation: out 0.2s forwards;
+    -moz-animation: out 0.2s forwards;
+    -o-animation: out 0.2s forwards;
+    animation: out 0.2s forwards;
+}
+
+.flex-item:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s;
+    -webkit-animation: in 0.2s forwards;
+    -moz-animation: in 0.2s forwards;
+    -o-animation: in 0.2s forwards;
+    animation: in 0.2s forwards;
+}
+
+@keyframes in {
+    from {
+        box-shadow: 0px 0px 5px #222;
+    }
+
+    to {
+        box-shadow: 9px 7px 10px #222;
+    }
+}
+
+@keyframes out {
+    from {
+        box-shadow: 9px 7px 10px #222;
+
+    }
+
+    to {
+        box-shadow: 0px 0px 5px #222;
+    }
+}
+
+.image-description {
+    position: absolute;
+    bottom: 1px;
+    left: 10%;
+
+}
+
+.image-info {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.image-title1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.image-title2 {
+    font-size: 1em;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.image-description {
+    font-size: 1.4em;
+    margin: 0;
+    position: static;
+    align-self: flex-end;
+}
+
+.image-header {
+    position: absolute;
+    font-size: 13px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    height: 29%;
+    margin: 0px;
+}
+
+.svg {
+    margin-right: 6px;
+}
+
+
+
+header {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    height: 16vw;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+h1 {
+    font-weight: 400;
+    font-size: 6vw;
+    margin: 0px;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 3.5vw;
+    margin: 0px;
+}
+
+
+.logo {
+    width: 18vw;
+    margin-right: 10px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#busqueda-y-precio {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+#precio-dolar,
+#precio-peso,
+#precio-oro {
+    display: inline;
+    font-size: 1.5vw;
+    margin: 5px 3px;
+}
+
+.visible.para-caja {
+    display: flex;
+    background-color: #fea500;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    /* Crea columnas flexibles */
+    gap: 10px;
+    /* Espacio entre las imágenes */
+    padding: 20px;
+    height: fit-content;
+}
+
+#menu-hamburguesa {
+    display: none;
+}
+
+nav.caja {
+    color: black;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    height: 6vw;
+    position: sticky;
+    top: 20px;
+}
+
+.boton-nav {
+    padding: 2px 10px;
+    font-size: 1.4vw;
+    border-radius: 25px;
+}
+
+.boton-nav:hover {
+    background-color: #F2460B;
+    border: solid 1px #222;
+}
+
+
+
+
+.menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    align-self: center;
+    text-decoration: none;
+    background-color: #F2460B;
+    border: 1px solid #222;
+    border-radius: 0 0 10px 10px;
+    padding: 5px 0;
+    list-style: none;
+    font-size: 1.4vw;
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+}
+
+.menu li {
+    display: flex;
+    justify-content: center;
+}
+
+.menu li:hover .submenu {
+    display: block;
+}
+
+#contenedor-busqueda-nav {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+
+.submenu li a {
+    color: #222;
+    padding: 5px 15px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.submenu li a:hover {
+    background-color: #222;
+    color: white;
+}
+
+#busqueda {
+    border-radius: 30px;
+    height: 1.5rem;
+    padding: 0px 10px;
+    width: 70%;
+    max-width: 200px;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+    background-position: bottom 50% right 8%;
+}
+
+
+
+.caja-busqueda {
+    height: 0px;
+    opacity: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: 95%;
+    margin: 5px;
+}
+
+
+.para-caja {
+    height: 80vh;
+    margin: 10px;
+}
+
+main {
+    text-align: center;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    background-color: #ddd;
+}
+
+.main img {
+    max-height: 90%;
+    max-width: 100%;
+}
+
+#responsive-video {
+    width: 80%;
+    height: 70vh;
+    /* El video ocupará el 70% de la altura de la ventana */
+    max-height: 90%;
+    /* Para limitar la altura del video al 90% de la ventana */
+    max-width: 100%;
+    /* Para limitar el ancho del video al 100% de la ventana */
+    background-color: #ddd;
+}
+
+
+footer {
+    bottom: 0px;
+    background-color: #4D9906;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5vw;
+    justify-self: end;
+}
+
+
+footer a {
+    text-decoration: none;
+    color: #000;
+}
+
+@font-face {
+    font-family: "Glacial Indifference";
+    src: url("../Sources/GlacialIndifference-Regular.otf");
+}
+
+@media (prefers-color-scheme: dark) {
+    .item {
+        color: #000;
+    }
+
+    body,
+    main,
+    .flex-item,
+    #responsive-video {
+        background-color: #222;
+    }
+
+}
+
+@media only screen and (max-width: 800px) {
+    .menu {
+        margin: 0px;
+        padding: 2px;
+    }
+
+    .boton-nav,
+    .submenu {
+        font-size: 2.3vw;
+        padding: 3px;
+        align-content: center;
+    }
+
+    .caja {
+        border-width: 2px;
+    }
+
+    footer p {
+        font-size: 3vw;
+    }
+
+    #busqueda-y-precio {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #precio-dolar,
+    #precio-peso,
+    #precio-oro {
+        font-size: 2.5vw;
+    }
+}
+
+
+@media only screen and (max-width: 550px) {
+    nav.caja {
+        height: 8vw;
+        border-radius: 50px;
+        width: 9vw;
+        align-self: flex-end;
+    }
+
+    #contenedor-busqueda-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        justify-content: space-evenly;
+    }
+
+    #nav {
+        align-self: flex-start;
+        margin-top: 5px;
+    }
+
+
+
+    #busqueda {
+        height: 8vw;
+    }
+
+    .menu {
+        width: 0;
+        height: 0;
+        margin: 0;
+        opacity: 0;
+        box-sizing: border-box;
+        display: none;
+        position: relative;
+    }
+
+    nav .menu.visible {
+        display: flex;
+        width: auto;
+        border-radius: 20px;
+        flex-direction: column;
+        grid-row-start: 2;
+        height: 100%;
+    }
+
+    #precios {
+        flex-direction: column;
+    }
+
+    #precio-dolar,
+    #precio-peso,
+    #precio-oro {
+        font-size: 2.8vw;
+    }
+
+    .submenu {
+        top: 0%;
+        left: -70%;
+        border-radius: 10px 0px 0px 10px;
+        padding: 5px 0;
+        list-style: none;
+        font-size: 1.4vw;
+    }
+
+    .boton-nav,
+    .submenu {
+        font-size: 2.8vw;
+        padding: 3px;
+        padding: 0.5vw;
+        margin: auto;
+        border-radius: 999px;
+    }
+
+    #menu-hamburguesa {
+        display: block;
+    }
+
+    nav.para-hamburguesa {
+        height: 35vw;
+        width: 70vw;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+}
+
+@media only screen and (max-width: 350px) {
+
+
+
+    .boton-nav,
+    .submenu,
+    #precio-dolar,
+    #precio-peso,
+    #precio-oro {
+        font-size: 3.2vw;
+        padding: 2px;
+    }
+
+    nav.para-hamburguesa {
+        width: 80vw;
+    }
+
+
+    header {
+        border-radius: 15px;
+    }
+}
+
+.visible {
+    opacity: 1;
+    border-radius: 10px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#box {
+    box-sizing: border-box;
+}
+
+.visible.para-caja.con-prods {
+    -webkit-animation: con_prods 0.2s forwards;
+    -moz-animation: con_prods 0.2s forwards;
+    -o-animation: con_prods 0.2s forwards;
+    animation: con_prods 0.2s forwards;
+}
+
+@keyframes con_prods {
+    from {
+        min-height: 0;
+    }
+
+    to {
+        min-height: 578px;
+    }
+}
