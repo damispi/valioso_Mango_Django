@@ -10,5 +10,8 @@ def inicio(request):
 def ComoFunciona(request):
     return render(request, "core/Pages/ComoFunciona.html")
 
+def ingreso(request):
+    return render(request, "core/Pages/ingreso.html")
+
 
 # Create your views here.

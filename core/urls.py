@@ -7,4 +7,5 @@ urlpatterns = [
    
     path('',views.inicio, name='inicio' ),
     path('valioso_mango/Pages/ComoFunciona/', views.ComoFunciona,name='como_funciona'),
+    path('ingreso',views.ingreso, name='ingreso'),
 ]
