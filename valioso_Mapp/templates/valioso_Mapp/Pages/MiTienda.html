@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiTienda</title>
+    <link rel="stylesheet" href="../Estilos/Estilos_MiTienda.css">
+    <link rel="icon" href="../Sources/Favicon (16 x 16px).svg" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <a href="../index.html">
+            <img src="../Sources/LogoMango.svg" class="logo" alt="Logo Mango">
+        </a>
+        <h1 class="Glacial">Mi tienda</h1>
+
+    </header>
+    <nav>
+        <input class="topnav" type="text" name="busqueda" id="busqueda" placeholder="Buscar productos..">
+        <ul id="opciones-nav">
+            <li id="boton-agregar">Agregar Producto</li>
+            <li id="boton-editar">Editar Producto</li>
+            <li id="boton-eliminar">Eliminar Producto</li>
+            <li id="boton-salir">Cerrar Sesión</li>
+        </ul>
+        <a id="menu-hamburguesa" class="boton-nav" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" height="15px"
+                viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path fill="white"
+                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+            </svg>
+        </a>
+    </nav>
+    <section class="flex-container" class="flex-item img">
+        <div id="modal-agregar" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Agregar producto</p>
+                <form action="" method="post">
+                        <label for="titulo-agregar">Titulo:</label>
+                        <input type="text" name="titulo"  id="titulo-agregar" required>
+                        <label for="descripcion-agregar">Descripción:</label>
+                        <input type="text" name="descripcion"  id="descripcion-agregar" required>
+                
+                        <label for="fotos-agregar">Fotos:</label>
+                        <input type="file" name="fotos" id="fotos-agregar" accept="image/png, image/jpeg" required>
+                        <label for="precio-agregar">Precio:</label>
+                        <input type="number" name="precio" id="precio-agregar">
+
+                    <input class="form-buttons" type="submit" value="GUARDAR">
+                </form>
+            </div>
+        </div>
+        <div id="modal-editar" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Editar producto</p>
+                <form action="" method="post">
+                        <label for="titulo-editar">Titulo:</label>
+                        <select name="titulo" id="titulo-editar"></select>
+                        <label for="descripcion-editar">Descripción:</label>
+                        <input type="text" name="descripcion" id="descripcion-editar" required>
+                
+                        <label for="fotos-editar">Fotos:</label>
+                        <input type="file" name="fotos" id="fotos-editar" accept="image/png, image/jpeg" required>
+                        <label for="precio-editar">Precio:</label>
+                        <input type="number" name="precio" id="precio-editar">
+                
+                    <input class="form-buttons" type="submit" value="GUARDAR">
+                </form>
+            </div>
+        </div>
+        <div id="modal-eliminar" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Eliminar producto</p>
+                Seleccione producto a eliminar: 
+                
+            </div>
+        </div>
+
+
+
+
+
+        
+
+
+
+
+    </section>
+</body>
+<script src="../JavaScript/script_mi_tienda.js"></script>
+
+</html>

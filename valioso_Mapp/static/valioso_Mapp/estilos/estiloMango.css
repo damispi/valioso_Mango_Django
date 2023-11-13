@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.svg {
+    margin-right: 6px;
+    pointer-events: none;
+}
+
+header {
+    background-color: #F2460B;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 16vw;
+    margin: 10px;
+    padding: 10px;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 6vw;
+    margin: 0px;
+    width: 80vw;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 3.5vw;
+    margin: 0px;
+    width: 80vw;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+@font-face {
+    font-family: "Glacial Indifference";
+    src: url("../Sources/GlacialIndifference-Regular.otf");
+}
+
+.Glacial {
+    font-family: "Glacial Indifference";
+
+}
+
+.logo {
+    width: 18vw;
+    margin-right: 10px;
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.item {
+    background-color: #FEA500;
+    padding: 20px;
+    border: 1px solid #4D9906;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+    /* Proporción 16:9 (ajusta esto según la relación de aspecto del video) */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+footer {
+    bottom: 0px;
+    background-color: #4D9906;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5vw;
+    justify-self: end;
+}
+
+
+footer a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+
+@media (prefers-color-scheme: dark) {
+    .item {
+        color: #000;
+    }
+
+    body {
+        background-color: #222;
+        color: #fff;
+    }
+}
