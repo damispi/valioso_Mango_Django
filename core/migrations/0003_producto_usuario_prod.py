@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('valioso_Mapp', '0002_usuario_alter_producto_options_and_more'),
+        ("core", "0002_usuario_alter_producto_options_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='producto',
-            name='usuario_prod',
-            field=models.CharField(default='Nombre de usuario', max_length=15),
+            model_name="producto",
+            name="usuario_prod",
+            field=models.CharField(default="Nombre de usuario", max_length=15),
         ),
     ]

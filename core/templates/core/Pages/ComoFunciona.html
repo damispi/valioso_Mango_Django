@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'valioso_Mapp/Estilos/estiloMango.css' %}">
+    <link rel="stylesheet" href="{% static 'core/estilos/estiloMango.css' %}">
     <title>Cómo Funciona Valioso Mango</title>
-    <link rel="icon" href="{% static 'valioso_Mapp/Sources/Favicon (16 x 16px).svg' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'core/Sources/Favicon (16 x 16px).svg' %}" type="image/x-icon">
 </head>
 
 <body>
     <header class="caja">
         <div class="logo">
             <a href="{% url 'inicio' %}">
-                <img src="{% static 'valioso_Mapp/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
+                <img src="{% static 'core/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
             </a>
         </div>
         <div class="title">
