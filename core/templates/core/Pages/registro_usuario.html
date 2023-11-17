@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{../Estilos/estilos_registro.css}">
+    <link rel="stylesheet" href="{% static 'core/estilos/estilos_registro.css' %}">
     <title>Registro usuario Valioso Mango</title>
-    <link rel="icon" href="../Sources/Favicon (16 x 16px).svg" type="image/x-icon">
+    <link rel="icon" href="{% static 'core/Sources/Favicon (16 x 16px).svg' %}" type="image/x-icon">
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <a href="../index.html">
-                <img src="../Sources/LogoValiosoMango.svg" class="logo" alt="Logo Mango">
+            <a href="">
+                <img src="{% static 'core/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
             </a>
         </div>
         <h1>
@@ -26,30 +27,30 @@
     </header>
     <main>
         <form action="achivodeprocesamiento.php" method="post">
-                <label for="nombre">Nombre de Usuario:</label>
-                <input type="text" name="nombre" minlength="7" id="nombre" required>
-                <label for="pass">Contraseña:</label>
-                <input type="password" name="pass" minlength="7"   id="pass" required>
+            <label for="nombre">Nombre de Usuario:</label>
+            <input type="text" name="nombre" minlength="7" id="nombre" required>
+            <label for="pass">Contraseña:</label>
+            <input type="password" name="pass" minlength="7" id="pass" required>
             <dialog id="dialog">
                 <h1>La clave y el usuario</h1>
-                <p>Deben tener mas de seis caracteres. Muchas gracias </p> 
+                <p>Deben tener mas de seis caracteres. Muchas gracias </p>
                 <button id="hide">Cerrar</button>
             </dialog>
             <button id="show">
                 Formato
                 Usuario y Contraseña ???
             </button>
-                <label for="nombre-y-apellido">Nombre y Apellido:</label>
-                <input type="text" name="nombre-y-apellido" id="nombre-y-apellido" required>
-                <label for="fecha-de-nacimiento">Fecha de nacimiento:</label>
-                <input type="date" name="fecha-de-nacimiento" id="fecha-de-nacimiento" required>
-                <label for="correo">Ingrese Email</label>
-                <input type="email" name="correo" id="correo" required>
+            <label for="nombre-y-apellido">Nombre y Apellido:</label>
+            <input type="text" name="nombre-y-apellido" id="nombre-y-apellido" required>
+            <label for="fecha-de-nacimiento">Fecha de nacimiento:</label>
+            <input type="date" name="fecha-de-nacimiento" id="fecha-de-nacimiento" required>
+            <label for="correo">Ingrese Email</label>
+            <input type="email" name="correo" id="correo" required>
             <input class="form-buttons" type="submit" value="GUARDAR">
         </form>
     </main>
 </body>
-<script src="../JavaScript/script_registro.js"></script>
+<script src="{% static 'core/scripts/script_registro.js' %}"></script>
 
 
 </html>

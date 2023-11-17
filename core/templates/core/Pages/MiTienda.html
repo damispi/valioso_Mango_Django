@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+{%load static%}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiTienda</title>
-    <link rel="stylesheet" href="../Estilos/Estilos_MiTienda.css">
-    <link rel="icon" href="../Sources/Favicon (16 x 16px).svg" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'core/estilos/estiloMango.css' %}">
+    <link rel="icon" href="{% static 'core/Sources/Favicon (16 x 16px).svg' %}" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <a href="../index.html">
-            <img src="../Sources/LogoMango.svg" class="logo" alt="Logo Mango">
+        <a href="">
+            <img src="{% static 'core/Sources/LogoMango.svg' %}" class="logo" alt="Logo Mango">
         </a>
         <h1 class="Glacial">Mi tienda</h1>
 
@@ -39,15 +40,15 @@
                 <span class="close">&times;</span>
                 <p>Agregar producto</p>
                 <form action="" method="post">
-                        <label for="titulo-agregar">Titulo:</label>
-                        <input type="text" name="titulo"  id="titulo-agregar" required>
-                        <label for="descripcion-agregar">Descripción:</label>
-                        <input type="text" name="descripcion"  id="descripcion-agregar" required>
-                
-                        <label for="fotos-agregar">Fotos:</label>
-                        <input type="file" name="fotos" id="fotos-agregar" accept="image/png, image/jpeg" required>
-                        <label for="precio-agregar">Precio:</label>
-                        <input type="number" name="precio" id="precio-agregar">
+                    <label for="titulo-agregar">Titulo:</label>
+                    <input type="text" name="titulo" id="titulo-agregar" required>
+                    <label for="descripcion-agregar">Descripción:</label>
+                    <input type="text" name="descripcion" id="descripcion-agregar" required>
+
+                    <label for="fotos-agregar">Fotos:</label>
+                    <input type="file" name="fotos" id="fotos-agregar" accept="image/png, image/jpeg" required>
+                    <label for="precio-agregar">Precio:</label>
+                    <input type="number" name="precio" id="precio-agregar">
 
                     <input class="form-buttons" type="submit" value="GUARDAR">
                 </form>
@@ -58,16 +59,16 @@
                 <span class="close">&times;</span>
                 <p>Editar producto</p>
                 <form action="" method="post">
-                        <label for="titulo-editar">Titulo:</label>
-                        <select name="titulo" id="titulo-editar"></select>
-                        <label for="descripcion-editar">Descripción:</label>
-                        <input type="text" name="descripcion" id="descripcion-editar" required>
-                
-                        <label for="fotos-editar">Fotos:</label>
-                        <input type="file" name="fotos" id="fotos-editar" accept="image/png, image/jpeg" required>
-                        <label for="precio-editar">Precio:</label>
-                        <input type="number" name="precio" id="precio-editar">
-                
+                    <label for="titulo-editar">Titulo:</label>
+                    <select name="titulo" id="titulo-editar"></select>
+                    <label for="descripcion-editar">Descripción:</label>
+                    <input type="text" name="descripcion" id="descripcion-editar" required>
+
+                    <label for="fotos-editar">Fotos:</label>
+                    <input type="file" name="fotos" id="fotos-editar" accept="image/png, image/jpeg" required>
+                    <label for="precio-editar">Precio:</label>
+                    <input type="number" name="precio" id="precio-editar">
+
                     <input class="form-buttons" type="submit" value="GUARDAR">
                 </form>
             </div>
@@ -76,8 +77,8 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <p>Eliminar producto</p>
-                Seleccione producto a eliminar: 
-                
+                Seleccione producto a eliminar:
+
             </div>
         </div>
 
@@ -85,13 +86,13 @@
 
 
 
-        
+
 
 
 
 
     </section>
 </body>
-<script src="../JavaScript/script_mi_tienda.js"></script>
+<script src="{% static 'core/scripts/script_mi_tienda.js' %}"></script>
 
 </html>
