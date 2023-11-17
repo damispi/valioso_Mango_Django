@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "core/Pages/footer.html" %}
 {% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valioso Mango</title>
+{% block estilo %}
     <link rel="stylesheet" href="{% static 'core/estilos/estilos_index.css' %}">
-    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="{% static 'core/Sources/Favicon (16 x 16px).svg' %}" type="image/x-icon">
+{% endblock %}
 
-</head>
-
-
-<body class="contenedor-flex">
-
+<body>
+    {% block no_footer %}
     <header class="caja">
         <img src="{% static 'core/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
         <div class="title">
@@ -75,19 +67,14 @@
         {% block video %}{% endblock %}
     </main>
 
-
-    <footer>
-        Copyright ©️ 2023 -Valioso mango :
-        <a href="mailto:valiosomango@hotmail.com"><i class="fas fa-envelope"></i>- Envíame un correo -</a>
-        <a href="tel:+34688888899"> <i class="fas fa-phone"></i>- Llamar por teléfono -</a>
-        <a href="whatsapp://send?text=Hola midudev"><i class="fab fa-whatsapp"></i>- Whatsapp</a>
-    </footer>
+    {%endblock%}
+    
 
 
 
-
+{%block script%}
     <script src="{% static 'core/scripts/script_index.js' %}"></script>
-
+{%endblock%}
 </body>
 
 </html>
