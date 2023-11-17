@@ -1,11 +1,12 @@
 from django.db import models
 
 
+
 class usuario(models.Model):
-    nombre_usuario=models.CharField(max_length=15)
-    contraseña=models.CharField(max_length=15)
-    nombre=models.CharField(max_length=20)
-    apellido=models.CharField(max_length=20)
+    nombre_usuario=models.CharField(max_length=50)
+    contraseña=models.CharField(max_length=50)
+    nombre=models.CharField(max_length=50)
+    apellido=models.CharField(max_length=50)
     fnac=models.DateField()
     mail=models.EmailField()
 
@@ -16,9 +17,9 @@ class usuario(models.Model):
     def __str__(self):
             return self.nombre_usuario 
 class Producto(models.Model):
-    usuario_prod=models.CharField(max_length=15, default='Nombre de usuario')
+    usuario_prod = models.ForeignKey(usuario, on_delete=models.CASCADE)
     titulo=models.CharField(max_length=50,help_text="Ingrese un Título para producto ")
-    descripcion=models.CharField(max_length=200,help_text="Ingrese una descripcion del producto")
+    descripcion=models.CharField(max_length=100,help_text="Ingrese una descripcion del producto")
     foto1=models.ImageField(upload_to='valioso_Mapp')
     foto2=models.ImageField(upload_to='valioso_Mapp')
     foto3=models.ImageField(upload_to='valioso_Mapp')

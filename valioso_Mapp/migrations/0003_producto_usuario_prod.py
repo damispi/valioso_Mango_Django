@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='producto',
             name='usuario_prod',
-            field=models.CharField(default='Nombre de usuario', max_length=15),
+            field=models.ForeignKey(to='valioso_Mapp.usuario', on_delete=models.CASCADE),
         ),
     ]
