@@ -1,0 +1,117 @@
+*{
+    box-sizing: border-box;
+}
+form section,
+form button {
+    margin: 0 auto;
+}
+form{
+    width: 40%;
+}
+
+body {
+    background-color: darkorange;
+    margin: 10px;
+    padding: 20px;
+    font-family: "Glacial Indifference";
+}
+
+
+
+label {
+    display: block;
+    /* Muestra cada etiqueta en una nueva línea */
+    font-weight: bold;
+    /* Puedes hacer que las etiquetas sean más destacadas */
+}
+
+input {
+    width: 100%;
+    /* Los campos de entrada se expanden al 100% del ancho del contenedor */
+    padding: 5px;
+    /* Añade espaciado interior en los campos de entrada */
+    border: 1px solid #ccc;
+    /* Añade un borde a los campos de entrada */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas a los campos de entrada */
+    margin-bottom: 15px;
+}
+
+.form-buttons {
+    margin-top: 10px;
+
+    /* Añade espacio entre los campos de entrada y los botones */
+}
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    margin-left: 0;
+}
+
+button {
+    background-color: #4CAF50;
+    /* Cambia el color de fondo del botón */
+    color: #fff;
+    /* Cambia el color del texto del botón a blanco */
+    padding: 10px 20px;
+    /* Añade espacio dentro del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas al botón */
+    cursor: pointer;
+    /* Cambia el cursor al estilo de puntero al pasar el ratón sobre el botón */
+}
+
+#check-recuerdame {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#recordarme {
+    display: inline;
+    width: 10%;
+}
+
+#olvidaste {
+    display: block;
+    
+}
+
+#recuerdame {
+    color: #555;
+    font-size: 13px;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    display: inline;
+
+}
+
+a {
+    text-decoration: none;
+    /* Elimina la decoración de enlace predeterminada */
+    margin-left: 10px;
+    /* Añade espacio entre el botón "GUARDAR" y el enlace "VOLVER" */
+}
+
+
+@font-face {
+    font-family: "Glacial Indifference";
+    src: url("../Sources/GlacialIndifference-Regular.otf");
+}
