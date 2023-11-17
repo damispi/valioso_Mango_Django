@@ -1,3 +1,4 @@
+
 class Articulo {
     img;
     textoHeader;
@@ -42,7 +43,7 @@ busqueda.addEventListener('keydown', (e) => {
     if (e.keyCode == 13) {
         e.preventDefault();
         if (busqueda.value.length != 0) {
-            let box=document.getElementById('box');
+            let box = document.getElementById('box');
             box.classList.add('con-prods');
             sleep(300).then(() => { dibujar(articulos); })
         }
@@ -109,15 +110,15 @@ var requestOptions = {
 };
 let apiFuncionando = false;
 let precioOro = 1651.651;
-let precioDolar=precioOro/10000;
-let precioArs=precioDolar*1000;
+let precioDolar = precioOro / 10000;
+let precioArs = precioDolar * 1000;
 if (apiFuncionando) {
     fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
         .then(response => response.text())
         .then(result => {
             let res = JSON.parse(result)
             precioOro = res.open_price;
-            precioDolar=precioOro/10000;
+            precioDolar = precioOro / 10000;
             document.querySelector('#precio-oro').textContent = `Precio por onza de oro en USD $${(precioOro).toFixed(2)}`;
             document.querySelector('#precio-dolar').textContent = `Valor del mango en USD: $${precioDolar.toFixed(2)}`;
         })
@@ -130,7 +131,7 @@ if (apiFuncionando) {
 fetch("https://dolarapi.com/v1/dolares/blue")
     .then(response => response.json())
     .then(data => {
-        precioArs=precioDolar*data.compra;
+        precioArs = precioDolar * data.compra;
         document.querySelector('#precio-peso').textContent = `Valor del mango en ARS: $${precioArs.toFixed(2)}`
     });
 
@@ -158,24 +159,24 @@ wide.addListener(wideSize);
 // Obtener una referencia al video
 const video = document.getElementById('responsive-video');
 
+
+let main = document.querySelector('main');
+
 // Función para cambiar la fuente del video
 function changeVideoSource() {
     const screenWidth = window.innerWidth;
-
+    let host = window.location.hostname;
     if (screenWidth < 768) {
-        // Dispositivo móvil
-        video.src = 'Sources/registrateVertical FULL (375 x 667 px).mp4';
+        window.location.href = ""+screenWidth;
     } else if (screenWidth >= 768 && screenWidth < 1024) {
         // Tableta
-        video.src = 'Sources/registrateHorizontal FULL (1366 x 768 px).mp4';
+        window.location.href = "" + screenWidth;
     } else {
         // Pantalla grande (PC)
-        video.src = 'Sources/registrateHorizontal FULL (1440 x 900 px).mp4';
+        window.location.href = "" + screenWidth;
     }
 }
-
 // Ejecutar la función al cargar la página y en cambios de tamaño de ventana
-window.addEventListener('load', changeVideoSource);
 window.addEventListener('resize', changeVideoSource);
 
 // Deshabilita los controles

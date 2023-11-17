@@ -1,0 +1,17 @@
+{% extends "../index.html" %}
+{%load static%}
+{% block video %}
+    {% if size < small %} 
+        <video id="responsive-video"
+            src="{%static 'core/Sources/registrateVertical FULL (375 x 667 px).mp4' %}" autoplay loop muted>
+        </video>
+    {% elif size < med %} 
+        <video id="responsive-video"
+            src="{%static 'core/Sources/registrateHorizontal FULL (1366 x 768 px).mp4' %}" autoplay loop muted>
+        </video>
+    {% else %}
+        <video id="responsive-video" 
+            src="{%static 'core/Sources/registrateHorizontal FULL (1440 x 900 px).mp4' %}" autoplay loop muted>
+        </video>
+    {% endif %}
+{% endblock %}

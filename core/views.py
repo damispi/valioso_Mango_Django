@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 
 def inicio(request):
-    return render(request, "core/index.html")
+    return render(request, "core/Pages/get_size.html")
 
 
 def ComoFunciona(request):
@@ -16,5 +16,11 @@ def ingreso(request):
 def registro(request):
     return render(request, "core/Pages/registro_usuario.html")
 
-
+def video(request,size):
+    context={
+        'small':768,
+        'med':1024,
+        'size':size
+    }
+    return render(request, "core/Pages/template_video_index.html",context)
 # Create your views here.
