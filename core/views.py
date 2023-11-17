@@ -13,5 +13,8 @@ def ComoFunciona(request):
 def ingreso(request):
     return render(request, "core/Pages/ingreso.html")
 
+def registro(request):
+    return render(request, "core/Pages/registro_usuario.html")
+
 
 # Create your views here.
