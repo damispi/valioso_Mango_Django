@@ -9,4 +9,5 @@ urlpatterns = [
     path("ingreso", views.ingreso, name="ingreso"),
     path("registro", views.registro, name="registro"),
     path("<int:size>", views.video, name="video"),
+    path("mi_tienda", views.mi_tienda, name="mi_tienda")
 ]

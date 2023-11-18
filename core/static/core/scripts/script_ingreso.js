@@ -29,7 +29,7 @@ document.querySelector('#enviar').addEventListener('click',(e)=>{
     let user=document.querySelector('#nombre');
     let pass=hashear(document.querySelector('#password').value);
     if (users.includes(user.value)&&passwds.includes(pass)){
-        window.location.href="../Pages/MiTienda.html";
+        window.location.href="mi_tienda";
     }else{
         document.write('Contraseña incorrecta');
     }

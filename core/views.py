@@ -23,4 +23,7 @@ def video(request,size):
         'size':size
     }
     return render(request, "core/Pages/template_video_index.html",context)
+
+def mi_tienda(request):
+    return render(request, "core/Pages/MiTienda.html")
 # Create your views here.
