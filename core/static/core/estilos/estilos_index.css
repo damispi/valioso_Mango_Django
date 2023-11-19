@@ -522,8 +522,8 @@ footer a {
     }
 
     nav.para-hamburguesa {
-        height: 35vw;
-        width: 70vw;
+        height: 22vw;
+        width: 30vw;
         border-radius: 20px;
         display: flex;
         flex-direction: column;
@@ -533,7 +533,7 @@ footer a {
 
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 380px) {
 
 
 
@@ -547,7 +547,7 @@ footer a {
     }
 
     nav.para-hamburguesa {
-        width: 80vw;
+        width: 50vw;
     }
 
 
