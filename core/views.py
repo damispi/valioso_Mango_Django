@@ -10,20 +10,22 @@ def inicio(request):
 def ComoFunciona(request):
     return render(request, "core/Pages/ComoFunciona.html")
 
+
 def ingreso(request):
-    return render(request, "core/Pages/ingreso.html")
+    return render(request, "core/Pages/form_ingreso.html")
+
 
 def registro(request):
-    return render(request, "core/Pages/registro_usuario.html")
+    return render(request, "core/Pages/form_registro_usuario.html")
 
-def video(request,size):
-    context={
-        'small':768,
-        'med':1024,
-        'size':size
-    }
-    return render(request, "core/Pages/template_video_index.html",context)
+
+def video(request, size):
+    context = {"small": 768, "med": 1024, "size": size}
+    return render(request, "core/Pages/template_video_index.html", context)
+
 
 def mi_tienda(request):
     return render(request, "core/Pages/MiTienda.html")
+
+
 # Create your views here.

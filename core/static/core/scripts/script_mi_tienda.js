@@ -98,7 +98,7 @@ document.querySelector('#boton-editar').addEventListener('click', () => {
  `
 })
 document.querySelector('#boton-salir').addEventListener('click', () => {
-    location.replace("../index.html")
+    window.location.href = "inicio";
 })
 document.body.addEventListener('click', (e) => {
     if (!wide.matches) {

@@ -1,43 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "core/Pages/footer.html" %}
 {% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'core/estilos/estilos_registro.css'%}">
-    <title>Ingreso usuario Valioso Mango</title>
-    <link rel="icon" href="{% static 'core/Sources/Favicon (16 x 16px).svg' %}" type="image/x-icon">
-</head>
+{%block estilo %}
+<link rel="stylesheet" href="{% static 'core/estilos/estilos_registro.css'%}">
+{%endblock%}
 
-<body class="formulario_registro">
-    <header>
-        <div class="logo">
-            <a href="{% url 'inicio' %}">
-                <img src="{% static 'core/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
-            </a>
-        </div>
-        <h1>
-            <h1>
-                Ingreso
-            </h1>
+{%block no_footer %}
+<header>
+    <div class="logo">
+        <a href="{% url 'inicio' %}">
+            <img src="{% static 'core/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
+        </a>
+    </div>
+    {% block h1 %}{%endblock%}
+</header>
+<main>
+    {% block form %}{%endblock%}
+</main>
+{%endblock%}
 
-    </header>
-    <main>
-        <form method="post">
-            <label for="nombre">Nombre de Usuario:</label>
-            <input type="text" name="nombre" id="nombre" required>
-            <label for="password">Contraseña:</label>
-            <input type="password" name="pass" id="password" required>
-            <div id="check-recuerdame">
-                <input type="checkbox" name="recordarme" id="recordarme">
-                <label for="recordarme" id="recuerdame">Recuérdame</label>
-            </div>
-            <a id="olvidaste" href="#">Olvidaste tu contraseña?</a>
-            <input type="submit" value="Enviar" id="enviar">
-    </main>
-</body>
-<script src="{% static 'core/scripts/script_ingreso.js' %}"></script>
-
-</html>
+{%block script%}{%endblock%}

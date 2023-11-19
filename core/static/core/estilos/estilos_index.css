@@ -371,24 +371,6 @@ main {
 }
 
 
-footer {
-    bottom: 0px;
-    background-color: #4D9906;
-    color: black;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1.5vw;
-    justify-self: end;
-}
-
-
-footer a {
-    text-decoration: none;
-    color: #000;
-}
 
 @font-face {
     font-family: "Glacial Indifference";
