@@ -1,4 +1,4 @@
-{% extends "core/Pages/footer.html" %}
+{% extends "core/pages/footer.html" %}
 {% load static %}
 
 {%block estilo %}
@@ -9,7 +9,7 @@
 <header>
     <div class="logo">
         <a href="{% url 'inicio' %}">
-            <img src="{% static 'core/Sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
+            <img src="{% static 'core/sources/LogoValiosoMango.svg' %}" class="logo" alt="Logo Mango">
         </a>
     </div>
     {% block h1 %}{%endblock%}

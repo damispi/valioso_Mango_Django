@@ -1,4 +1,4 @@
-{% extends "core/Pages/ingreso.html" %}
+{% extends "core/pages/ingreso.html" %}
 {% load static %}
 
 {% block h1 %}
@@ -11,28 +11,28 @@
 {%endblock%}
 
 {% block form %}
-        <form action="achivodeprocesamiento.php" method="post">
-            <label for="nombre">Nombre de Usuario:</label>
-            <input type="text" name="nombre" minlength="7" id="nombre" required>
-            <label for="pass">Contraseña:</label>
-            <input type="password" name="pass" minlength="7" id="pass" required>
-            <dialog id="dialog">
-                <h1>La clave y el usuario</h1>
-                <p>Deben tener mas de seis caracteres. Muchas gracias </p>
-                <button id="hide">Cerrar</button>
-            </dialog>
-            <button id="show">
-                Formato
-                Usuario y Contraseña ???
-            </button>
-            <label for="nombre-y-apellido">Nombre y Apellido:</label>
-            <input type="text" name="nombre-y-apellido" id="nombre-y-apellido" required>
-            <label for="fecha-de-nacimiento">Fecha de nacimiento:</label>
-            <input type="date" name="fecha-de-nacimiento" id="fecha-de-nacimiento" required>
-            <label for="correo">Ingrese Email</label>
-            <input type="email" name="correo" id="correo" required>
-            <input class="form-buttons" type="submit" value="GUARDAR">
-        </form>
+<form action="achivodeprocesamiento.php" method="post">
+    <label for="nombre">Nombre de Usuario:</label>
+    <input type="text" name="nombre" minlength="7" id="nombre" required>
+    <label for="pass">Contraseña:</label>
+    <input type="password" name="pass" minlength="7" id="pass" required>
+    <dialog id="dialog">
+        <h1>La clave y el usuario</h1>
+        <p>Deben tener mas de seis caracteres. Muchas gracias </p>
+        <button id="hide">Cerrar</button>
+    </dialog>
+    <button id="show">
+        Formato
+        Usuario y Contraseña ???
+    </button>
+    <label for="nombre-y-apellido">Nombre y Apellido:</label>
+    <input type="text" name="nombre-y-apellido" id="nombre-y-apellido" required>
+    <label for="fecha-de-nacimiento">Fecha de nacimiento:</label>
+    <input type="date" name="fecha-de-nacimiento" id="fecha-de-nacimiento" required>
+    <label for="correo">Ingrese Email</label>
+    <input type="email" name="correo" id="correo" required>
+    <input class="form-buttons" type="submit" value="GUARDAR">
+</form>
 {%endblock%}
 
 {%block script%}
