@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class usuario(models.Model):
+class Usuario(models.Model):
     nombre_usuario = models.CharField(max_length=50)
     contraseña = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
@@ -18,7 +18,7 @@ class usuario(models.Model):
 
 
 class Producto(models.Model):
-    usuario_prod = models.ForeignKey(usuario, on_delete=models.CASCADE)
+    usuario_prod = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     titulo = models.CharField(
         max_length=50, help_text="Ingrese un Título para producto "
     )
