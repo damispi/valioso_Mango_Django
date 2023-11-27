@@ -71,12 +71,12 @@ def video(request, size):
 
 def mi_tienda(request):
     if request.method == "POST":
-        usuario_prod = Usuario.objects.get(pk=request.session['id_usuario'])
+        usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
         titulo = request.POST.get("titulo")
         descripcion = request.POST.get("descripcion")
         foto1 = request.POST.get("fotos")
-        foto2=None
-        foto3=None
+        foto2 = None
+        foto3 = None
         if request.POST.get("fotos2"):
             foto2 = request.POST.get("fotos2")
             if request.POST.get("fotos3"):
@@ -96,9 +96,10 @@ def mi_tienda(request):
             request.session["productos"] = []
             if "productos" in request.session:
                 for producto in Producto.objects.filter(
-                    usuario_prod=request.session["id_usuario"]
+                    usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
                 ):
-                    request.session["productos"].add(producto)
+                    request.session["productos"].append(producto.pk) #falta seguir lo que viene aca
+                    
         else:
             return redirect("ingreso")
         return render(request, "core/pages/mi_tienda.html")

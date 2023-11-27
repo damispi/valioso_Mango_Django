@@ -8,6 +8,10 @@ body {
   background-color: #ddd;
 }
 
+#fotos-agregar2,#fotos-agregar3{
+  display: none;
+}
+
 
 
 @font-face {
