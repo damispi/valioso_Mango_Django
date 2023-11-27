@@ -1,0 +1,14 @@
+{%for producto in productos %}
+    <article class="flex-item">
+        <a href=${arts[i].img}>
+            <img src=${arts[i].img} alt="Imagen de producto">
+            <header class="image-header">
+                <h2 class="image-title1">${arts[i].textoHeader}</h2>
+            </header>
+            <footer class="image-info">
+                <h2 class="image-title2">${arts[i].textoFooter}</h2>
+                <p class="image-description">ლ${arts[i].textoPrecio}</p>
+            </footer>
+        </a>
+    </article>
+{% endfor %}

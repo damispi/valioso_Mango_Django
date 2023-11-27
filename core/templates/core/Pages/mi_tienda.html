@@ -37,7 +37,8 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Agregar producto</p>
-            <form action="" method="post">
+            <form action="{% url 'mi_tienda' %}" method="post">
+                {% csrf_token %}
                 <label for="titulo-agregar">Titulo:</label>
                 <input type="text" name="titulo" id="titulo-agregar" required>
                 <label for="descripcion-agregar">Descripción:</label>

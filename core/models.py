@@ -27,8 +27,8 @@ class Producto(models.Model):
         max_length=100, help_text="Ingrese una descripcion del producto"
     )
     foto1 = models.ImageField(upload_to="valioso_Mapp")
-    foto2 = models.ImageField(upload_to="valioso_Mapp")
-    foto3 = models.ImageField(upload_to="valioso_Mapp")
+    foto2 = models.ImageField(default=None, upload_to="valioso_Mapp", null=True)
+    foto3 = models.ImageField(default=None, upload_to="valioso_Mapp", null=True)
     create = models.DateTimeField(auto_now=True)
     update = models.DateTimeField(auto_now=True)
 
