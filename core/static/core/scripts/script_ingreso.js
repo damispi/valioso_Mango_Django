@@ -24,10 +24,10 @@ passwds=[hashear('pass')]
 
 
 
-document.querySelector('#enviar').addEventListener('click',(e)=>{
+document.querySelector('#enviarr').addEventListener('click',(e)=>{
     e.preventDefault();
-    let user=document.querySelector('#nombre');
-    let pass=hashear(document.querySelector('#password').value);
+    let user=document.querySelector('#nombree');
+    let pass=hashear(document.querySelector('#passwordd').value);
     if (users.includes(user.value)&&passwds.includes(pass)){
         window.location.href="mi_tienda";
     }else{

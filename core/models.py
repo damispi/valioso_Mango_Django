@@ -1,20 +1,21 @@
 from django.db import models
 
-
+ 
 class Usuario(models.Model):
-    nombre_usuario = models.CharField(max_length=50)
+    nombre_usuario = models.CharField(max_length=50, unique=True)
     contraseña = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50, null=True, blank=True)
+    nombre = models.CharField(max_length=50, null=True, blank=True)
     fnac = models.DateField()
     mail = models.EmailField()
-
     class Meta:
         verbose_name = "usuario"
         verbose_name_plural = "usuarios"
-
+    
+    
     def __str__(self):
         return self.nombre_usuario
+    
 
 
 class Producto(models.Model):
@@ -39,4 +40,3 @@ class Producto(models.Model):
         return self.titulo
 
 
-# Create your models here.char

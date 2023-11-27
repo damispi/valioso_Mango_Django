@@ -46,7 +46,7 @@ function crearArticulo(articulo) {
     section.appendChild(art)
 }
 
-crearArticulo(new Articulo("../Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126"));
+crearArticulo(new Articulo("/static/core/Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126"));
 crearArticulo(new Articulo("../Sources/tv.jpg", "Tv 32 pulgadas", "Usada, en buen estado", "150"));
 crearArticulo(new Articulo("../Sources/YerbaSalus2.jpg", "Yerba Salus 1Kg", "Bulto por 10 paquetes", "30"));
 const modales = ["modal-agregar", "modal-editar", "modal-eliminar"];

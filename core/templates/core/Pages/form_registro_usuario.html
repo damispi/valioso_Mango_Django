@@ -11,11 +11,23 @@
 {%endblock%}
 
 {% block form %}
-<form action="achivodeprocesamiento.php" method="post">
-    <label for="nombre">Nombre de Usuario:</label>
-    <input type="text" name="nombre" minlength="7" id="nombre" required>
+
+
+<form  action="{% url 'registro' %}" method="post">
+    {% csrf_token %}
+    <label for="nombreusuario">Nombre de Usuario:</label>
+    <input type="text" name="nombreusuario"  minlength="7" id="nombre" required>
     <label for="pass">Contraseña:</label>
-    <input type="password" name="pass" minlength="7" id="pass" required>
+    <input type="password" name="pass" placeholder=""minlength="7" id="pass" required>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    
     <dialog id="dialog">
         <h1>La clave y el usuario</h1>
         <p>Deben tener mas de seis caracteres. Muchas gracias </p>
@@ -25,8 +37,10 @@
         Formato
         Usuario y Contraseña ???
     </button>
-    <label for="nombre-y-apellido">Nombre y Apellido:</label>
-    <input type="text" name="nombre-y-apellido" id="nombre-y-apellido" required>
+    <label for="apellido"> Apellido:</label>
+    <input type="text" name="apellido" id="apellido" required>
+    <label for="nombres"> Nombres:</label>
+    <input type="text" name="nombres" id="nombre" required>
     <label for="fecha-de-nacimiento">Fecha de nacimiento:</label>
     <input type="date" name="fecha-de-nacimiento" id="fecha-de-nacimiento" required>
     <label for="correo">Ingrese Email</label>
