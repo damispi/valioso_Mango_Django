@@ -13,7 +13,8 @@ footer {
     position: relative;
     margin-top: auto;
 }
-body{
+
+body {
     display: flex;
     flex-direction: column;
 }

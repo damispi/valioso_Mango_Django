@@ -166,12 +166,12 @@ let main = document.querySelector('main');
 function changeVideoSource() {
     const screenWidth = window.innerWidth;
     let host = window.location.hostname;
-    if (screenWidth < 768 && prevSize>768) {
+    if (screenWidth < 768 && prevSize > 768) {
         window.location.href = "" + screenWidth;
-    } else if ((screenWidth >= 768 && screenWidth < 1024)&&(prevSize<768||prevSize>=1024)) {
+    } else if ((screenWidth >= 768 && screenWidth < 1024) && (prevSize < 768 || prevSize >= 1024)) {
         // Tableta
         window.location.href = "" + screenWidth;
-    } else if (screenWidth >= 1024 && prevSize < 1024){
+    } else if (screenWidth >= 1024 && prevSize < 1024) {
         // Pantalla grande (PC)
         window.location.href = "" + screenWidth;
     }

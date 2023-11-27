@@ -178,11 +178,12 @@ header.producto {
   border-radius: 5px;
   overflow: hidden;
   border: 2px solid #4D9906;
-  
-    transition: transform 0.2s;
-    -webkit-animation: out 0.2s forwards;
-    animation: out 0.2s forwards;
+
+  transition: transform 0.2s;
+  -webkit-animation: out 0.2s forwards;
+  animation: out 0.2s forwards;
 }
+
 .flex-item:hover {
   transform: scale(1.03);
   transition: transform 0.2s;
@@ -199,10 +200,11 @@ header.producto {
     box-shadow: 9px 7px 10px #222;
   }
 }
+
 @keyframes out {
   from {
     box-shadow: 9px 7px 10px #222;
-    
+
   }
 
   to {
@@ -249,12 +251,14 @@ p {
   width: 80%;
   /* Could be more or less, depending on screen size */
 }
-.form-buttons{
-      padding: 5px 10px;
-        border: solid 2px #4CAF50;
-        border-radius: 50px;
+
+.form-buttons {
+  padding: 5px 10px;
+  border: solid 2px #4CAF50;
+  border-radius: 50px;
 }
-.modal-content p{
+
+.modal-content p {
   position: static;
   font-size: 19px;
   align-self: center;
@@ -268,7 +272,8 @@ p {
   font-size: 28px;
   font-weight: bold;
 }
-form{
+
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -334,6 +339,7 @@ form{
     font-size: 13px;
   }
 }
+
 @media (max-width: 700px) {
   #opciones-nav {
     display: none;
@@ -350,11 +356,11 @@ form{
 @media (prefers-color-scheme: dark) {
 
   body,
-  .flex-item,.modal-content {
+  .flex-item,
+  .modal-content {
     background-color: #222;
     color: #fff;
   }
 
 
 }
-
