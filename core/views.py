@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Usuario, Producto
+from .forms import AgregarProductoForm
 from django.contrib import messages
+from django import forms
 
 
 def inicio(request):
@@ -71,29 +73,32 @@ def video(request, size):
 
 def mi_tienda(request):
     if request.method == "POST":
+        agregar_form = AgregarProductoForm(request.POST, request.FILES)
         usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
         titulo = request.POST.get("titulo")
         descripcion = request.POST.get("descripcion")
-        precio=request.POST.get("precio")
-        foto1 = request.POST.get("fotos")
-        foto2 = None
-        foto3 = None
-        if request.POST.get("fotos2"):
-            foto2 = request.POST.get("fotos2")
-            if request.POST.get("fotos3"):
-                foto3 = request.POST.get("fotos3")
-        nuevo_producto = Producto(
-            usuario_prod=usuario_prod,
-            titulo=titulo,
-            descripcion=descripcion,
-            precio=precio,
-            foto1=foto1,
-            foto2=foto2,
-            foto3=foto3,
-        )
-        nuevo_producto.save()
-        return redirect("core/pages/mi_tienda.html")
+        precio = request.POST.get("precio")
+        if agregar_form.is_valid():
+            foto1 = agregar_form.cleaned_data["foto1"]
+            foto2 = None
+            foto3 = None
+            if agregar_form.cleaned_data["foto2"]:
+                foto2 = agregar_form.cleaned_data["foto2"]
+                if agregar_form.cleaned_data["foto3"]:
+                    foto3 = agregar_form.cleaned_data["foto3"]
+            nuevo_producto = Producto(
+                usuario_prod=usuario_prod,
+                titulo=titulo,
+                descripcion=descripcion,
+                precio=precio,
+                foto1=foto1,
+                foto2=foto2,
+                foto3=foto3,
+            )
+            nuevo_producto.save()
+        return redirect("mi_tienda")
     else:
+        agregar_form = AgregarProductoForm()
         if "id_usuario" in request.session:
             request.session["productos"] = []
             if "productos" in request.session:
@@ -103,10 +108,10 @@ def mi_tienda(request):
                 ):
                     productos.append(producto)
                     # falta seguir lo que viene aca
-                context = {"productos": productos}
+                context = {"productos": productos, "agregar_form": agregar_form}
             else:
-                context = {"productos": []}
+                context = {"productos": [], "agregar_form": agregar_form}
 
         else:
             return redirect("ingreso")
-        return render(request, "core/pages/mi_tienda.html", context)
+        return render(request, "core/Pages/mi_tienda.html", context)

@@ -72,15 +72,25 @@ document.querySelector('#boton-editar').addEventListener('click', () => {
 document.querySelector('#boton-salir').addEventListener('click', () => {
     window.location.href = "../";
 })
-let fotos1=document.querySelector('#fotos-agregar')
-fotos1.addEventListener('change',()=>{
-    console.log("algo")
-    let fotos2 = fotos1.nextElementSibling;
-    fotos2.style.display='block'
-    fotos2.addEventListener('change',()=>{
-        fotos2.nextElementSibling.style.display='block';
+
+
+document.addListener('DOMContentLoaded',()=>{
+    let fotos1 = document.querySelector('#fotos-agregar')
+    let fotos2= fotos1.nextElementSibling;
+    let fotos3 = fotos2.nextElementSibling;
+    fotos2.style.display='none';
+    fotos3.style.display='block';
+
+
+    fotos1.addEventListener('change', () => {
+        console.log("algo")
+        fotos2.style.display = 'block'
+        fotos2.addEventListener('change', () => {
+            fotos3.style.display = 'block';
+        })
     })
 })
+
 document.body.addEventListener('click', (e) => {
     if (!wide.matches) {
         let ids = [];

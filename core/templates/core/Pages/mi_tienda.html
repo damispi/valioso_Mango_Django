@@ -37,20 +37,9 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Agregar producto</p>
-            <form action="{% url 'mi_tienda' %}" method="post">
+            <form action="" method=POST enctype="multipart/form-data">
                 {% csrf_token %}
-                <label for="titulo-agregar">Titulo:</label>
-                <input type="text" name="titulo" id="titulo-agregar" required>
-                <label for="descripcion-agregar">Descripción:</label>
-                <input type="text" name="descripcion" id="descripcion-agregar" required>
-
-                <label for="fotos-agregar">Fotos:</label>
-                <input type="file" name="fotos" id="fotos-agregar" accept="image/png, image/jpeg" required>
-                <input type="file" name="fotos2" id="fotos-agregar2" accept="image/png, image/jpeg">
-                <input type="file" name="fotos3" id="fotos-agregar3" accept="image/png, image/jpeg">
-                <label for="precio-agregar">Precio:</label>
-                <input type="number" name="precio" id="precio-agregar">
-
+                {{agregar_form.as_p}}
                 <input class="form-buttons" type="submit" value="GUARDAR">
             </form>
         </div>
@@ -59,7 +48,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Editar producto</p>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <label for="titulo-editar">Titulo:</label>
                 <select name="titulo" id="titulo-editar"></select>
                 <label for="descripcion-editar">Descripción:</label>
@@ -84,7 +73,9 @@
     </div>
     {% for producto in productos %}
         <article class="flex-item">
+            <!-- aca hay que poner la imagen -->
             <a href="{{producto.foto1.url}}">
+                <!-- y aca -->
                 <img src="{{producto.foto1.url}}" alt="Imagen de producto">
                 <header class="image-header">
                     <h2 class="image-title1">{{producto.titulo}}</h2>

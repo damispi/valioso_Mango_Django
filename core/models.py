@@ -1,6 +1,8 @@
 from django.db import models
+import datetime
+import os
 
- 
+
 class Usuario(models.Model):
     nombre_usuario = models.CharField(max_length=50, unique=True)
     contraseña = models.CharField(max_length=50)
@@ -8,14 +10,16 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=50, null=True, blank=True)
     fnac = models.DateField()
     mail = models.EmailField()
+
     class Meta:
         verbose_name = "usuario"
         verbose_name_plural = "usuarios"
-    
-    
+
     def __str__(self):
         return self.nombre_usuario
-    
+
+
+
 
 
 class Producto(models.Model):
@@ -26,10 +30,10 @@ class Producto(models.Model):
     descripcion = models.CharField(
         max_length=100, help_text="Ingrese una descripcion del producto"
     )
-    precio= models.DecimalField(max_digits=6, decimal_places=2)
-    foto1 = models.ImageField(upload_to="valioso_Mapp")
-    foto2 = models.ImageField(default=None, upload_to="valioso_Mapp", null=True)
-    foto3 = models.ImageField(default=None, upload_to="valioso_Mapp", null=True)
+    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    foto1 = models.ImageField(upload_to="images/")
+    foto2 = models.ImageField(upload_to="images/", null=True, blank=True)
+    foto3 = models.ImageField(upload_to="images/", null=True, blank=True)
     create = models.DateTimeField(auto_now=True)
     update = models.DateTimeField(auto_now=True)
 
@@ -39,5 +43,3 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.titulo
-
-
