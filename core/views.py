@@ -74,6 +74,7 @@ def mi_tienda(request):
         usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
         titulo = request.POST.get("titulo")
         descripcion = request.POST.get("descripcion")
+        precio=request.POST.get("precio")
         foto1 = request.POST.get("fotos")
         foto2 = None
         foto3 = None
@@ -85,21 +86,27 @@ def mi_tienda(request):
             usuario_prod=usuario_prod,
             titulo=titulo,
             descripcion=descripcion,
+            precio=precio,
             foto1=foto1,
             foto2=foto2,
             foto3=foto3,
         )
         nuevo_producto.save()
-        return render(request, "core/pages/mi_tienda.html")
+        return redirect("core/pages/mi_tienda.html")
     else:
         if "id_usuario" in request.session:
             request.session["productos"] = []
             if "productos" in request.session:
+                productos = []
                 for producto in Producto.objects.filter(
                     usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
                 ):
-                    request.session["productos"].append(producto.pk) #falta seguir lo que viene aca
-                    
+                    productos.append(producto)
+                    # falta seguir lo que viene aca
+                context = {"productos": productos}
+            else:
+                context = {"productos": []}
+
         else:
             return redirect("ingreso")
-        return render(request, "core/pages/mi_tienda.html")
+        return render(request, "core/pages/mi_tienda.html", context)

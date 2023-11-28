@@ -1,15 +1,3 @@
-class Articulo {
-    img;
-    textoHeader;
-    textoFooter;
-    textoPrecio;
-    constructor(img, textoHeader, textoFooter, textoPrecio) {
-        this.img = img;
-        this.textoFooter = textoFooter;
-        this.textoHeader = textoHeader;
-        this.textoPrecio = textoPrecio;
-    }
-}
 
 
 const section = document.querySelector('.flex-container');
@@ -30,25 +18,9 @@ wideSize(wide);
 wide.addListener(wideSize);
 
 
-function crearArticulo(articulo) {
-    let art = document.createElement('article');
-    art.classList.add('flex-item');
-    art.innerHTML = `<a href=${articulo.img}>
-            <img src=${articulo.img} alt="Imagen de producto">
-                <header class="image-header">
-                    <h2 class="image-title1">${articulo.textoHeader}</h2>
-                </header>
-                <footer class="image-info">
-                    <h2 class="image-title2">${articulo.textoFooter}</h2>
-                    <p class="image-description">ლ${articulo.textoPrecio}</p>
-                </footer>
-        </a>`
-    section.appendChild(art)
-}
 
-crearArticulo(new Articulo("../Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126"));
-crearArticulo(new Articulo("../Sources/tv.jpg", "Tv 32 pulgadas", "Usada, en buen estado", "150"));
-crearArticulo(new Articulo("../Sources/YerbaSalus2.jpg", "Yerba Salus 1Kg", "Bulto por 10 paquetes", "30"));
+
+
 const modales = ["modal-agregar", "modal-editar", "modal-eliminar"];
 const botones = ["boton-agregar", "boton-editar", "boton-eliminar"];
 const spans = document.getElementsByClassName("close");

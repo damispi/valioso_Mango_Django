@@ -26,6 +26,7 @@ class Producto(models.Model):
     descripcion = models.CharField(
         max_length=100, help_text="Ingrese una descripcion del producto"
     )
+    precio= models.DecimalField(max_digits=6, decimal_places=2)
     foto1 = models.ImageField(upload_to="valioso_Mapp")
     foto2 = models.ImageField(default=None, upload_to="valioso_Mapp", null=True)
     foto3 = models.ImageField(default=None, upload_to="valioso_Mapp", null=True)

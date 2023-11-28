@@ -82,6 +82,20 @@
 
         </div>
     </div>
+    {% for producto in productos %}
+        <article class="flex-item">
+            <a href="{{producto.foto1.url}}">
+                <img src="{{producto.foto1.url}}" alt="Imagen de producto">
+                <header class="image-header">
+                    <h2 class="image-title1">{{producto.titulo}}</h2>
+                </header>
+                <footer class="image-info">
+                    <h2 class="image-title2">{{producto.descripcion}}</h2>
+                    <p class="image-description">ლ{{producto.precio}}</p>
+                </footer>
+            </a>
+        </article>
+    {% endfor %}
 </section>
 {%endblock%}
 {%block script%}
