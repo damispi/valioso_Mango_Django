@@ -49,15 +49,8 @@
             <span class="close">&times;</span>
             <p>Editar producto</p>
             <form action="" method="post" enctype="multipart/form-data">
-                <label for="titulo-editar">Titulo:</label>
-                <select name="titulo" id="titulo-editar"></select>
-                <label for="descripcion-editar">Descripción:</label>
-                <input type="text" name="descripcion" id="descripcion-editar" required>
-
-                <label for="fotos-editar">Fotos:</label>
-                <input type="file" name="fotos" id="fotos-editar" accept="image/png, image/jpeg" required>
-                <label for="precio-editar">Precio:</label>
-                <input type="number" name="precio" id="precio-editar">
+                {% csrf_token %}
+                {{editar_form.as_p}}
 
                 <input class="form-buttons" type="submit" value="GUARDAR">
             </form>

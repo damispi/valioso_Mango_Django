@@ -16,3 +16,20 @@ class AgregarProductoForm(forms.ModelForm):
         }
         widgets = {}
 
+
+class EditarProdcutoForm(AgregarProductoForm):
+    class Meta:
+        model = Producto
+        fields = ("titulo", "descripcion", "precio", "foto1", "foto2", "foto3")
+        labels = {
+            "nombre": "Nombre",
+            "descripcion": "Descripcion",
+            "precio": "Precio",
+            "foto1": "",
+            "foto2": "",
+            "foto3": "",
+        }
+        widgets = {"titulo": forms.Select(choices=())}
+
+    def set_choices(self, choices):
+        self.fields["titulo"].choices = choices

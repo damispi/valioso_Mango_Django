@@ -77,18 +77,18 @@ document.querySelector('#boton-eliminar').addEventListener('click', () => {
     })
 })
 document.querySelector('#boton-editar').addEventListener('click', () => {
-    let prods = document.querySelectorAll('.flex-item');
+//     let prods = document.querySelectorAll('.flex-item');
     
-    fetch('get_productos').then(response=>response.text()).then(result=>{
-        let prods=JSON.parse(result);
-        let res = "";
-        for (let i = 0; i < prods.res.length; i++) {
-            res += `<option value="${prods.res[i].titulo}">${prods.res[i].titulo}</option>`;
-        }
-        document.querySelector('#titulo-editar').innerHTML = `
- ${res}
- `
-    })
+//     fetch('get_productos').then(response=>response.text()).then(result=>{
+//         let prods=JSON.parse(result);
+//         let res = "";
+//         for (let i = 0; i < prods.res.length; i++) {
+//             res += `<option value="${prods.res[i].titulo}">${prods.res[i].titulo}</option>`;
+//         }
+//         document.querySelector('#id_titulo').innerHTML = `
+//  ${res}
+//  `
+    // })
   
 })
 document.querySelector('#boton-salir').addEventListener('click', () => {

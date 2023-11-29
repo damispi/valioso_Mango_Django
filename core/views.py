@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Usuario, Producto
 from .forms import AgregarProductoForm
+from .forms import EditarProdcutoForm
 from django.contrib import messages
 from django import forms
 from django.http import JsonResponse
@@ -100,6 +101,8 @@ def mi_tienda(request):
         return redirect("mi_tienda")
     else:
         agregar_form = AgregarProductoForm()
+        editar_form = EditarProdcutoForm()
+        choices=[]
         if "id_usuario" in request.session:
             request.session["productos"] = []
             if "productos" in request.session:
@@ -108,10 +111,20 @@ def mi_tienda(request):
                     usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
                 ):
                     productos.append(producto)
+                    choices.append(producto.titulo)
                     # falta seguir lo que viene aca
-                context = {"productos": productos, "agregar_form": agregar_form}
+                editar_form.set_choices(choices)
+                context = {
+                    "productos": productos,
+                    "agregar_form": agregar_form,
+                    "editar_form": editar_form,
+                }
             else:
-                context = {"productos": [], "agregar_form": agregar_form}
+                context = {
+                    "productos": [],
+                    "agregar_form": agregar_form,
+                    "editar_form": editar_form,
+                }
 
         else:
             return redirect("ingreso")
@@ -126,10 +139,6 @@ def get_productos(request):
         titulo = str(producto.titulo)
         desc = str(producto.descripcion)
         precio = str(producto.precio)
-        prod = {
-            'titulo':titulo,
-            'precio':precio,
-            'descripcion':desc
-        }
+        prod = {"titulo": titulo, "precio": precio, "descripcion": desc}
         res.append(prod)
-    return JsonResponse({'res':res})
+    return JsonResponse({"res": res})
