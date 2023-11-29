@@ -3,6 +3,7 @@ from .models import Usuario, Producto
 from .forms import AgregarProductoForm
 from django.contrib import messages
 from django import forms
+from django.http import JsonResponse
 
 
 def inicio(request):
@@ -115,3 +116,20 @@ def mi_tienda(request):
         else:
             return redirect("ingreso")
         return render(request, "core/Pages/mi_tienda.html", context)
+
+
+def get_productos(request):
+    res = []
+    for producto in Producto.objects.filter(
+        usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
+    ):
+        titulo = str(producto.titulo)
+        desc = str(producto.descripcion)
+        precio = str(producto.precio)
+        prod = {
+            'titulo':titulo,
+            'precio':precio,
+            'descripcion':desc
+        }
+        res.append(prod)
+    return JsonResponse({'res':res})

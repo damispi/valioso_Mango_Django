@@ -13,5 +13,6 @@ urlpatterns = [
     path("ingreso", views.ingreso, name="ingreso"),
     path("registro", views.registro, name="registro"),
     path("<int:size>", views.video, name="video"),
-    path("mi_tienda/", views.mi_tienda, name="mi_tienda"),
+    path("mi_tienda", views.mi_tienda, name="mi_tienda"),
+    path("get_productos", views.get_productos, name="get_productos")
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

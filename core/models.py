@@ -30,7 +30,7 @@ class Producto(models.Model):
     descripcion = models.CharField(
         max_length=100, help_text="Ingrese una descripcion del producto"
     )
-    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    precio = models.DecimalField(max_digits=6, decimal_places=2, help_text="Precio del producto en mangos")
     foto1 = models.ImageField(upload_to="images/")
     foto2 = models.ImageField(upload_to="images/", null=True, blank=True)
     foto3 = models.ImageField(upload_to="images/", null=True, blank=True)

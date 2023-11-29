@@ -12,7 +12,11 @@ body {
   display: none;
 }
 
-
+.helptext{
+  font-size: 0.5em;
+  color: #777;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
 @font-face {
   font-family: "Glacial Indifference";

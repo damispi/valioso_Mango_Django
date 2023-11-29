@@ -7,11 +7,12 @@ class AgregarProductoForm(forms.ModelForm):
         model = Producto
         fields = ("titulo", "descripcion", "precio", "foto1", "foto2", "foto3")
         labels = {
-            "nombre": "nombre",
-            "descripcion": "descripcion",
-            "precio": "precio",
+            "nombre": "Nombre",
+            "descripcion": "Descripcion",
+            "precio": "Precio",
             "foto1": "",
             "foto2": "",
             "foto3": "",
         }
         widgets = {}
+
