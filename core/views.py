@@ -102,7 +102,7 @@ def mi_tienda(request):
     else:
         agregar_form = AgregarProductoForm()
         editar_form = EditarProdcutoForm()
-        choices=[]
+        choices = []
         if "id_usuario" in request.session:
             request.session["productos"] = []
             if "productos" in request.session:
@@ -111,9 +111,10 @@ def mi_tienda(request):
                     usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
                 ):
                     productos.append(producto)
-                    choices.append(producto.titulo)
+                    choices.append((producto.titulo, producto.titulo))
                     # falta seguir lo que viene aca
-                editar_form.set_choices(choices)
+
+                editar_form.get_choices(choices)
                 context = {
                     "productos": productos,
                     "agregar_form": agregar_form,
