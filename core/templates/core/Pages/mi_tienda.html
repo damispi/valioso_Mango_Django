@@ -40,7 +40,7 @@
             <form action="" method=POST enctype="multipart/form-data">
                 {% csrf_token %}
                 {{agregar_form.as_p}}
-                <input class="form-buttons" type="submit" value="GUARDAR">
+                <input class="form-buttons" type="submit" name="agregar-producto" value="GUARDAR">
             </form>
         </div>
     </div>
@@ -48,11 +48,10 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>Editar producto</p>
-            <form action="" method=PUT enctype="multipart/form-data">
+            <form action="" method=POST enctype="multipart/form-data">
                 {% csrf_token %}
                 {{editar_form.as_p}}
-
-                <input class="form-buttons" type="submit" value="GUARDAR">
+                <input class="form-buttons" type="submit" name="editar-producto" value="EDITAR">
             </form>
         </div>
     </div>

@@ -3,7 +3,6 @@ from .models import Usuario, Producto
 from .forms import AgregarProductoForm
 from .forms import EditarProdcutoForm
 from django.contrib import messages
-from django import forms
 from django.http import JsonResponse
 
 
@@ -76,28 +75,48 @@ def video(request, size):
 def mi_tienda(request):
     if request.method == "POST":
         agregar_form = AgregarProductoForm(request.POST, request.FILES)
-        usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
-        titulo = request.POST.get("titulo")
-        descripcion = request.POST.get("descripcion")
-        precio = request.POST.get("precio")
-        if agregar_form.is_valid():
-            foto1 = agregar_form.cleaned_data["foto1"]
-            foto2 = None
-            foto3 = None
-            if agregar_form.cleaned_data["foto2"]:
-                foto2 = agregar_form.cleaned_data["foto2"]
-                if agregar_form.cleaned_data["foto3"]:
-                    foto3 = agregar_form.cleaned_data["foto3"]
-            nuevo_producto = Producto(
-                usuario_prod=usuario_prod,
-                titulo=titulo,
-                descripcion=descripcion,
-                precio=precio,
-                foto1=foto1,
-                foto2=foto2,
-                foto3=foto3,
-            )
-            nuevo_producto.save()
+        editar_form = EditarProdcutoForm(request.POST, request.FILES)
+        if "editar-producto" in request.POST:
+            titulo = request.POST.get("titulo")
+            editar_form.fields["titulo"].choices = [(titulo, titulo)]
+            if editar_form.is_valid():
+                usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
+                producto_editado = Producto.objects.get(
+                    usuario_prod=usuario_prod, titulo=request.POST.get("titulo")
+                )
+                producto_editado.descripcion = editar_form.cleaned_data["descripcion"]
+                producto_editado.precio = editar_form.cleaned_data["precio"]
+                if editar_form.cleaned_data["foto1"]:    
+                    producto_editado.foto1 = editar_form.cleaned_data["foto1"]
+                    if editar_form.cleaned_data["foto2"]:
+                        producto_editado.foto2 = editar_form.cleaned_data["foto2"]
+                        if editar_form.cleaned_data["foto3"]:
+                            producto_editado.foto3 = editar_form.cleaned_data["foto3"]
+                
+                producto_editado.save()
+        if "agregar-producto" in request.POST:
+            if agregar_form.is_valid():
+                usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
+                titulo = agregar_form.cleaned_data["titulo"]
+                descripcion = agregar_form.cleaned_data["descripcion"]
+                precio = agregar_form.cleaned_data["precio"]
+                foto1 = agregar_form.cleaned_data["foto1"]
+                foto2 = None
+                foto3 = None
+                if agregar_form.cleaned_data["foto2"]:
+                    foto2 = agregar_form.cleaned_data["foto2"]
+                    if agregar_form.cleaned_data["foto3"]:
+                        foto3 = agregar_form.cleaned_data["foto3"]
+                nuevo_producto = Producto(
+                    usuario_prod=usuario_prod,
+                    titulo=titulo,
+                    descripcion=descripcion,
+                    precio=precio,
+                    foto1=foto1,
+                    foto2=foto2,
+                    foto3=foto3,
+                )
+                nuevo_producto.save()
         return redirect("mi_tienda")
     else:
         agregar_form = AgregarProductoForm()
@@ -105,31 +124,26 @@ def mi_tienda(request):
         choices = []
         if "id_usuario" in request.session:
             request.session["productos"] = []
-            if "productos" in request.session:
-                productos = []
-                for producto in Producto.objects.filter(
-                    usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
-                ):
-                    productos.append(producto)
-                    choices.append((producto.titulo, producto.titulo))
-                    # falta seguir lo que viene aca
 
-                editar_form.get_choices(choices)
-                context = {
-                    "productos": productos,
-                    "agregar_form": agregar_form,
-                    "editar_form": editar_form,
-                }
-            else:
-                context = {
-                    "productos": [],
-                    "agregar_form": agregar_form,
-                    "editar_form": editar_form,
-                }
+            productos = []
+            for producto in Producto.objects.filter(
+                usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
+            ):
+                productos.append(producto)
+                choices.append((producto.titulo, producto.titulo))
 
+                # falta seguir lo que viene aca
+            print(choices)
+
+            editar_form.get_choices(choices)
+            context = {
+                "productos": productos,
+                "agregar_form": agregar_form,
+                "editar_form": editar_form,
+            }
         else:
             return redirect("ingreso")
-        return render(request, "core/Pages/mi_tienda.html", context)
+    return render(request, "core/Pages/mi_tienda.html", context)
 
 
 def get_productos(request):

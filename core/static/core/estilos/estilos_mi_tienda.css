@@ -8,9 +8,6 @@ body {
   background-color: #ddd;
 }
 
-#fotos-agregar2,#fotos-agregar3{
-  display: none;
-}
 
 .helptext{
   font-size: 0.5em;

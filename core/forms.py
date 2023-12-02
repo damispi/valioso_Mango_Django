@@ -25,9 +25,10 @@ class EditarProdcutoForm(forms.Form):
     precio = forms.DecimalField(
         max_digits=6, decimal_places=2, help_text="Precio del producto en mangos"
     )
-    foto1 = forms.ImageField()
+    foto1 = forms.ImageField(required=False)
     foto2 = forms.ImageField(required=False)
     foto3 = forms.ImageField(required=False)
+    
 
     def get_choices(self, *args):
         choices = []
