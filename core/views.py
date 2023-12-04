@@ -1,9 +1,10 @@
+from tkinter import Image
 from django.shortcuts import render, redirect
 from .models import Usuario, Producto
-from .forms import AgregarProductoForm
+from .forms import AgregarProductoForm, EliminarProductoForm
 from .forms import EditarProdcutoForm
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 
 def inicio(request):
@@ -15,8 +16,7 @@ def como_funciona(request):
 
 
 def ingreso(request):
-    request.session["id_usuario"] = None
-    request.session["productos"] = None
+    request.session.flush()
     if request.method == "POST":
         nombre_usuario = request.POST.get("nombreusuario")
         contraseña = request.POST.get("contraseña")
@@ -76,6 +76,7 @@ def mi_tienda(request):
     if request.method == "POST":
         agregar_form = AgregarProductoForm(request.POST, request.FILES)
         editar_form = EditarProdcutoForm(request.POST, request.FILES)
+        eliminar_form = EliminarProductoForm(request.POST, request.FILES)
         if "editar-producto" in request.POST:
             titulo = request.POST.get("titulo")
             editar_form.fields["titulo"].choices = [(titulo, titulo)]
@@ -86,13 +87,13 @@ def mi_tienda(request):
                 )
                 producto_editado.descripcion = editar_form.cleaned_data["descripcion"]
                 producto_editado.precio = editar_form.cleaned_data["precio"]
-                if editar_form.cleaned_data["foto1"]:    
+                if editar_form.cleaned_data["foto1"]:
                     producto_editado.foto1 = editar_form.cleaned_data["foto1"]
                     if editar_form.cleaned_data["foto2"]:
                         producto_editado.foto2 = editar_form.cleaned_data["foto2"]
                         if editar_form.cleaned_data["foto3"]:
                             producto_editado.foto3 = editar_form.cleaned_data["foto3"]
-                
+
                 producto_editado.save()
         if "agregar-producto" in request.POST:
             if agregar_form.is_valid():
@@ -117,10 +118,18 @@ def mi_tienda(request):
                     foto3=foto3,
                 )
                 nuevo_producto.save()
+        if "eliminar-producto" in request.POST:
+            titulo = request.POST.get("titulo")
+            usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
+            producto_eliminado = Producto.objects.get(
+                usuario_prod=usuario_prod, titulo=request.POST.get("titulo")
+            )
+            producto_eliminado.delete()
         return redirect("mi_tienda")
     else:
         agregar_form = AgregarProductoForm()
         editar_form = EditarProdcutoForm()
+        eliminar_form = EliminarProductoForm()
         choices = []
         if "id_usuario" in request.session:
             request.session["productos"] = []
@@ -136,24 +145,47 @@ def mi_tienda(request):
             print(choices)
 
             editar_form.get_choices(choices)
+            eliminar_form.get_choices(choices)
             context = {
                 "productos": productos,
                 "agregar_form": agregar_form,
                 "editar_form": editar_form,
+                "eliminar_form": eliminar_form,
             }
         else:
             return redirect("ingreso")
     return render(request, "core/Pages/mi_tienda.html", context)
 
 
-def get_productos(request):
+def get_productos(request, filter):
     res = []
-    for producto in Producto.objects.filter(
-        usuario_prod=Usuario.objects.get(pk=request.session["id_usuario"])
-    ):
+    for producto in Producto.objects.filter(titulo__icontains=filter):
         titulo = str(producto.titulo)
         desc = str(producto.descripcion)
         precio = str(producto.precio)
-        prod = {"titulo": titulo, "precio": precio, "descripcion": desc}
+        link1 = f"{(hash(str(producto.pk)))}_1"
+        link2 = f"{(hash(str(producto.pk)))}_2"
+        link3 = f"{(hash(str(producto.pk)))}_3"
+        prod = {"titulo": titulo, "precio": precio, "descripcion": desc,"link1": link1, "link2":link2,"link3":link3}
         res.append(prod)
+
     return JsonResponse({"res": res})
+
+def get_image(request, code,foto):
+    for producto in Producto.objects.all():
+        prod=producto.foto1
+        pk=hash(str(producto.pk))
+        if int(code)==int(pk):
+            if foto==1:
+                prod=producto.foto1
+            elif foto==2:
+                prod==producto.foto2
+            else:
+                prod==producto.foto3
+            break
+    
+    return HttpResponse(prod, content_type="image/jpeg")
+    
+    
+
+        

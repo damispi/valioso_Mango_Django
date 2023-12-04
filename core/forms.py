@@ -17,7 +17,17 @@ class AgregarProductoForm(forms.ModelForm):
         widgets = {}
 
 
-class EditarProdcutoForm(forms.Form):
+class EliminarProductoForm(forms.Form):
+    titulo = forms.ChoiceField(widget=forms.Select())
+
+    def get_choices(self, *args):
+        choices = []
+        for arg in args:
+            choices = arg
+        self.fields["titulo"].choices = choices
+
+
+class EditarProdcutoForm(EliminarProductoForm):
     titulo = forms.ChoiceField(widget=forms.Select())
     descripcion = forms.CharField(
         max_length=100, help_text="Ingrese una descripcion del producto"
@@ -28,10 +38,3 @@ class EditarProdcutoForm(forms.Form):
     foto1 = forms.ImageField(required=False)
     foto2 = forms.ImageField(required=False)
     foto3 = forms.ImageField(required=False)
-    
-
-    def get_choices(self, *args):
-        choices = []
-        for arg in args:
-            choices = arg
-        self.fields['titulo'].choices = choices

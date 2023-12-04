@@ -1,36 +1,36 @@
 var prevSize = window.innerWidth;
 class Articulo {
-    img;
-    textoHeader;
-    textoFooter;
-    textoPrecio;
-    constructor(img, textoHeader, textoFooter, textoPrecio) {
-        this.img = img;
-        this.textoFooter = textoFooter;
-        this.textoHeader = textoHeader;
-        this.textoPrecio = textoPrecio;
+    imgs=[];
+    titulo;
+    descripcion;
+    precio;
+    constructor(imgs, titulo, descripcion, precio) {
+        this.imgs = imgs;
+        this.descripcion = descripcion;
+        this.titulo = titulo;
+        this.precio = precio;
     }
 }
 
 
-var art1 = new Articulo("Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126");
-var art2 = new Articulo("Sources/tv.jpg", "Tv 32 pulgadas", "Usada, en buen estado", "150");
-var art3 = new Articulo("Sources/YerbaSalus2.jpg", "Yerba Salus 1Kg", "Bulto por 10 paquetes", "30");
-var articulos = [art1, art2, art3];
+// var art1 = new Articulo("Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126");
+// var art2 = new Articulo("Sources/tv.jpg", "Tv 32 pulgadas", "Usada, en buen estado", "150");
+// var art3 = new Articulo("Sources/YerbaSalus2.jpg", "Yerba Salus 1Kg", "Bulto por 10 paquetes", "30");
+var articulos = [];
 
 function dibujar(arts) {
     let box = document.getElementById('box');
     box.innerHTML = '';
     for (let i = 0; i < arts.length; i++) {
         box.innerHTML += `<article class="flex-item">
-        <a href=${arts[i].img}>
-            <img src=${arts[i].img} alt="Imagen de producto">
+        <a href=${arts[i].imgs[0]}>
+            <img src=${arts[i].imgs[0]} alt="Imagen de producto">
                 <header class="image-header">
-                    <h2 class="image-title1">${arts[i].textoHeader}</h2>
+                    <h2 class="image-title1">${arts[i].titulo}</h2>
                 </header>
                 <footer class="image-info">
-                    <h2 class="image-title2">${arts[i].textoFooter}</h2>
-                    <p class="image-description">ლ${arts[i].textoPrecio}</p>
+                    <h2 class="image-title2">${arts[i].descripcion}</h2>
+                    <p class="image-description">ლ${arts[i].precio}</p>
                 </footer>
         </a>
         </article>`
@@ -41,11 +41,38 @@ const busqueda = document.getElementById('busqueda');
 const busquedaYPrecio = document.getElementById('busqueda-y-precio');
 busqueda.addEventListener('keydown', (e) => {
     if (e.keyCode == 13) {
+        articulos=[]
         e.preventDefault();
         if (busqueda.value.length != 0) {
             let box = document.getElementById('box');
             box.classList.add('con-prods');
-            sleep(300).then(() => { dibujar(articulos); })
+            fetch(`get_productos_${busqueda.value}`).then(response=>response.text()).then(result=>
+            {
+                let res=JSON.parse(result).res;
+                for (let i=0;i<res.length;i++){
+                    
+                    let art = new Articulo([], res[i].titulo, res[i].descripcion, res[i].precio);
+                    fetch(res[i].link1).then(result=>{
+                        art.imgs.push(result.url)
+                    }).then(x=>
+                        fetch(res[i].link2).then(result => {
+                            art.imgs.push(result.url)
+                        }).then(x=>
+                            fetch(res[i].link3).then(result => {
+                                art.imgs.push(result.url)
+                                console.log(result.url)
+                                console.log[`${i}/${res.length}`]
+                                articulos.push(art)
+                            }).then(x=>
+                                dibujar(articulos)
+                            )
+                        )
+                    )
+                }
+            }).then(sleep(300).then(() => {
+                dibujar(articulos);
+                console.log(articulos)
+            }));
         }
     }
 })

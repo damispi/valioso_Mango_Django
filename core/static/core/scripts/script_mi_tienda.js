@@ -63,38 +63,8 @@ for (let i = 0; i < spans.length; i++) {
 
 }
 
-document.querySelector('#boton-eliminar').addEventListener('click', () => {
-    let prods = document.querySelectorAll('.flex-item');
-    let res = "";
-    for (let i = 0; i < prods.length; i++) {
-        res += `<option value="value${i}">${prods[i].firstChild.childNodes[3].childNodes[1].textContent}</option>`;
-    }
-    document.querySelector('#modal-eliminar').childNodes[1].innerHTML = `<span id="span-agregado" class="close">&times;</span>
-                <p>Eliminar producto</p>
-                Seleccione producto a eliminar: 
-    <select name="select">
- ${res}
- </select>
- <button>Eliminar</button>`;
-    document.querySelector('#span-agregado').addEventListener('click', () => {
-        cerrarModal();
-    })
-})
-document.querySelector('#boton-editar').addEventListener('click', () => {
-//     let prods = document.querySelectorAll('.flex-item');
-    
-//     fetch('get_productos').then(response=>response.text()).then(result=>{
-//         let prods=JSON.parse(result);
-//         let res = "";
-//         for (let i = 0; i < prods.res.length; i++) {
-//             res += `<option value="${prods.res[i].titulo}">${prods.res[i].titulo}</option>`;
-//         }
-//         document.querySelector('#id_titulo').innerHTML = `
-//  ${res}
-//  `
-    // })
-  
-})
+
+
 document.querySelector('#boton-salir').addEventListener('click', () => {
     window.location.href = "../";
 })
