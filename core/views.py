@@ -161,10 +161,13 @@ def get_productos(request, filter):
         titulo = str(producto.titulo)
         desc = str(producto.descripcion)
         precio = str(producto.precio)
-        link1 = f"{(hash(str(producto.pk)))}_1"
-        link2 = f"{(hash(str(producto.pk)))}_2"
-        link3 = f"{(hash(str(producto.pk)))}_3"
-        prod = {"titulo": titulo, "precio": precio, "descripcion": desc,"link1": link1, "link2":link2,"link3":link3}
+        links=[]
+        links.append(f"{(hash(str(producto.pk)))}_1")
+        if producto.foto2:
+            links.append(f"{(hash(str(producto.pk)))}_2")
+            if producto.foto3:
+                links.append(f"{(hash(str(producto.pk)))}_3")
+        prod = {"titulo": titulo, "precio": precio, "descripcion": desc,"links": links}
         res.append(prod)
 
     return JsonResponse({"res": res})
@@ -182,10 +185,10 @@ def get_image(request, code,foto):
         elif int(code)==pk and foto==3:
             prod=producto.foto3
             break
-
-    
-    return HttpResponse(prod, content_type="image/jpeg")
-    
+    if prod:    
+        return HttpResponse(prod, content_type="image/jpeg")
+    else:
+        return HttpResponse('')
     
 
         

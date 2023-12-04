@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     for (let i=0;i<fotos1.length;i++){
         fotos1[i].parentNode.addEventListener('change', () => {
-            console.log("algo")
             fotos2[i].style.display = 'block'
             fotos2[i].addEventListener('change', () => {
                 fotos3[i].style.display = 'block';

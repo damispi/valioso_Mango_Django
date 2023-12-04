@@ -1,11 +1,14 @@
 var prevSize = window.innerWidth;
 class Articulo {
     imgs = [];
+
+    links = []
     titulo;
     descripcion;
     precio;
-    constructor(imgs, titulo, descripcion, precio) {
+    constructor(imgs, links, titulo, descripcion, precio) {
         this.imgs = imgs;
+        this.links = links;
         this.descripcion = descripcion;
         this.titulo = titulo;
         this.precio = precio;
@@ -27,24 +30,35 @@ function dibujar(arts) {
         box.innerHTML = `<p style="margin: 5px auto;font-size: 2em;"> Ningun producto encontrado con ese nombre! </p>`
     } else {
         for (let i = 0; i < arts.length; i++) {
-            let article=document.createElement('article');
+            let article = document.createElement('article');
             article.classList.add('flex-item');
-            let a=document.createElement('a');
-            a.id=`art${i}`;
+            let a = document.createElement('a');
+            a.id = `art${i}`;
             article.appendChild(a);
-            a.addEventListener('click',(e)=>{ //TODO
-                console.log(e.target.parentNode);
+            a.addEventListener('click', (e) => { 
+                
+                for (let j=1;j<arts[i].links[0].length;j++){
+                    if (arts[i].imgs.length==1){
+                        fetch(arts[i].links[0][j]).then(x=>{
+                            arts[i].imgs.push(x.url);
+                            console.log(arts[i])
+                        })
+                    }
+                }
+                
+                console.log(arts[i])
                 let modal = document.createElement('div');
                 let main = document.querySelector('main')
                 modal.classList.add('modal');
                 modal.innerHTML = `<div class="modal-content">
             <span class="close">&times;</span>
-            <p>Editar producto</p>
-            <form action="" method=POST enctype="multipart/form-data">
-                {% csrf_token %}
-                {{editar_form.as_p}}
-                <input class="form-buttons" type="submit" name="editar-producto" value="EDITAR">
-            </form>
+            <p> ${arts[i].titulo} </p>
+            <section class='product-image'>
+                <a id='left'> < </a>
+                <img src='${arts[i].imgs[0]}'>
+                <a id='right'> > </a>
+            </section>
+            <p> ${arts[i].descripcion} </p>
         </div>`
                 main.appendChild(modal);
                 window.addEventListener('click', (event) => {
@@ -52,7 +66,7 @@ function dibujar(arts) {
                         main.removeChild(modal)
                     }
                 })
-                document.querySelector('.close').addEventListener('click',()=>{
+                document.querySelector('.close').addEventListener('click', () => {
                     main.removeChild(modal)
                 })
 
@@ -82,33 +96,20 @@ busqueda.addEventListener('keydown', (e) => {
             fetch(`get_productos_${busqueda.value}`).then(response => response.text()).then(result => {
                 let res = JSON.parse(result).res;
                 for (let i = 0; i < res.length; i++) {
-
-                    let art = new Articulo([], res[i].titulo, res[i].descripcion, res[i].precio);
-                    fetch(res[i].link1).then(result => {
+                    let art = new Articulo([], [res[i].links], res[i].titulo, res[i].descripcion, res[i].precio);
+                    fetch(res[i].links[0]).then(result => {
                         art.imgs.push(result.url)
-                        console.log(result.url)
-                    }).then(x =>
-                        fetch(res[i].link2).then(result => {
-                            art.imgs.push(result.url)
-                            console.log(result.url)
-                        }).then(x =>
-                            fetch(res[i].link3).then(result => {
-                                art.imgs.push(result.url)
-                                console.log(result.url)
-                                console.log(`${i + 1}/${res.length}`)
-                                articulos.push(art)
-                            }).then(x =>
-                                dibujar(articulos)
-                            )
-                        )
-                    )
+                    }).then(x => {
+                        articulos.push(art)
+                        dibujar(articulos)
+                    })
                 }
             });
         }
     }
 })
 busqueda.addEventListener('input', () => {
-    document.getElementById('box').innerHTML='';
+    document.getElementById('box').innerHTML = '';
     document.getElementById('box').classList.remove('con-prods');
     let cuadro = document.getElementsByClassName('caja-busqueda');
     cuadro[0].classList.toggle('visible', busqueda.value.length != 0)
