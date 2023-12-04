@@ -175,14 +175,16 @@ def get_image(request, code,foto):
     for producto in Producto.objects.all():
         prod=producto.foto1
         pk=hash(str(producto.pk))
-        if int(code)==int(pk):
-            if foto==1:
-                prod=producto.foto1
-            elif foto==2:
-                prod==producto.foto2
-            else:
-                prod==producto.foto3
+        if int(code)==pk and foto==1:
+            prod=producto.foto1
             break
+        elif int(code)==pk and foto==2:
+            prod=producto.foto2
+            break
+        elif int(code)==pk and foto==3:
+            prod=producto.foto3
+            break
+
     
     return HttpResponse(prod, content_type="image/jpeg")
     

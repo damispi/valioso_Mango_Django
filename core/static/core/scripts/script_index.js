@@ -1,6 +1,6 @@
 var prevSize = window.innerWidth;
 class Articulo {
-    imgs=[];
+    imgs = [];
     titulo;
     descripcion;
     precio;
@@ -21,8 +21,11 @@ var articulos = [];
 function dibujar(arts) {
     let box = document.getElementById('box');
     box.innerHTML = '';
-    for (let i = 0; i < arts.length; i++) {
-        box.innerHTML += `<article class="flex-item">
+    if (arts.length == 0) {
+        box.innerHTML = `<p style="margin: 5px auto;font-size: 2em;"> Ningun producto encontrado con ese nombre! </p>`
+    } else {
+        for (let i = 0; i < arts.length; i++) {
+            box.innerHTML += `<article class="flex-item">
         <a href=${arts[i].imgs[0]}>
             <img src=${arts[i].imgs[0]} alt="Imagen de producto">
                 <header class="image-header">
@@ -34,6 +37,7 @@ function dibujar(arts) {
                 </footer>
         </a>
         </article>`
+        }
     }
 }
 
@@ -41,43 +45,41 @@ const busqueda = document.getElementById('busqueda');
 const busquedaYPrecio = document.getElementById('busqueda-y-precio');
 busqueda.addEventListener('keydown', (e) => {
     if (e.keyCode == 13) {
-        articulos=[]
+        articulos = []
         e.preventDefault();
         if (busqueda.value.length != 0) {
             let box = document.getElementById('box');
             box.classList.add('con-prods');
-            fetch(`get_productos_${busqueda.value}`).then(response=>response.text()).then(result=>
-            {
-                let res=JSON.parse(result).res;
-                for (let i=0;i<res.length;i++){
-                    
+            fetch(`get_productos_${busqueda.value}`).then(response => response.text()).then(result => {
+                let res = JSON.parse(result).res;
+                for (let i = 0; i < res.length; i++) {
+
                     let art = new Articulo([], res[i].titulo, res[i].descripcion, res[i].precio);
-                    fetch(res[i].link1).then(result=>{
+                    fetch(res[i].link1).then(result => {
                         art.imgs.push(result.url)
-                    }).then(x=>
+                        console.log(result.url)
+                    }).then(x =>
                         fetch(res[i].link2).then(result => {
                             art.imgs.push(result.url)
-                        }).then(x=>
+                            console.log(result.url)
+                        }).then(x =>
                             fetch(res[i].link3).then(result => {
                                 art.imgs.push(result.url)
                                 console.log(result.url)
-                                console.log[`${i}/${res.length}`]
+                                console.log(`${i + 1}/${res.length}`)
                                 articulos.push(art)
-                            }).then(x=>
+                            }).then(x =>
                                 dibujar(articulos)
                             )
                         )
                     )
                 }
-            }).then(sleep(300).then(() => {
-                dibujar(articulos);
-                console.log(articulos)
-            }));
+            });
         }
     }
 })
 busqueda.addEventListener('input', () => {
-    dibujar([]);
+    document.getElementById('box').innerHTML='';
     document.getElementById('box').classList.remove('con-prods');
     let cuadro = document.getElementsByClassName('caja-busqueda');
     cuadro[0].classList.toggle('visible', busqueda.value.length != 0)
