@@ -59,7 +59,6 @@ def registro(request):
             mail=request.POST.get("correo"),
         )
         nuevo_usuario.save()
-        print(nuevo_usuario)
 
         messages.success(request, "¡Registro exitoso!")
         return redirect("ingreso")
@@ -142,7 +141,6 @@ def mi_tienda(request):
                 choices.append((producto.titulo, producto.titulo))
 
                 # falta seguir lo que viene aca
-            print(choices)
 
             editar_form.get_choices(choices)
             eliminar_form.get_choices(choices)

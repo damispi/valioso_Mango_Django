@@ -13,6 +13,8 @@ class Articulo {
 }
 
 
+
+
 // var art1 = new Articulo("Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126");
 // var art2 = new Articulo("Sources/tv.jpg", "Tv 32 pulgadas", "Usada, en buen estado", "150");
 // var art3 = new Articulo("Sources/YerbaSalus2.jpg", "Yerba Salus 1Kg", "Bulto por 10 paquetes", "30");
@@ -25,18 +27,45 @@ function dibujar(arts) {
         box.innerHTML = `<p style="margin: 5px auto;font-size: 2em;"> Ningun producto encontrado con ese nombre! </p>`
     } else {
         for (let i = 0; i < arts.length; i++) {
-            box.innerHTML += `<article class="flex-item">
-        <a href=${arts[i].imgs[0]}>
-            <img src=${arts[i].imgs[0]} alt="Imagen de producto">
-                <header class="image-header">
-                    <h2 class="image-title1">${arts[i].titulo}</h2>
-                </header>
+            let article=document.createElement('article');
+            article.classList.add('flex-item');
+            let a=document.createElement('a');
+            a.id=`art${i}`;
+            article.appendChild(a);
+            a.addEventListener('click',(e)=>{ //TODO
+                console.log(e.target.parentNode);
+                let modal = document.createElement('div');
+                let main = document.querySelector('main')
+                modal.classList.add('modal');
+                modal.innerHTML = `<div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Editar producto</p>
+            <form action="" method=POST enctype="multipart/form-data">
+                {% csrf_token %}
+                {{editar_form.as_p}}
+                <input class="form-buttons" type="submit" name="editar-producto" value="EDITAR">
+            </form>
+        </div>`
+                main.appendChild(modal);
+                window.addEventListener('click', (event) => {
+                    if (event.target == modal) {
+                        main.removeChild(modal)
+                    }
+                })
+                document.querySelector('.close').addEventListener('click',()=>{
+                    main.removeChild(modal)
+                })
+
+            })
+            a.innerHTML = `<img src=${arts[i].imgs[0]} alt="Imagen de producto">
+                        <header class="image-header">
+                            <h2 class="image-title1">${arts[i].titulo}</h2>
+                        </header>
                 <footer class="image-info">
-                    <h2 class="image-title2">${arts[i].descripcion}</h2>
-                    <p class="image-description">ლ${arts[i].precio}</p>
-                </footer>
-        </a>
-        </article>`
+                        <h2 class="image-title2">${arts[i].descripcion}</h2>
+                        <p class="image-description">ლ${arts[i].precio}</p>
+                </footer>`
+            box.appendChild(article);
         }
     }
 }
