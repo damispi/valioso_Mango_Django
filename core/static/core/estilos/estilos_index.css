@@ -595,6 +595,10 @@ main {
     /* Could be more or less, depending on screen size */
 }
 
+#left,#right{
+    margin: auto 5px;
+}
+
 .product-image{
     display: flex;
     flex-direction: row;

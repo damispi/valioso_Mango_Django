@@ -14,7 +14,15 @@
         <img src="{% static 'core/sources/LogoMango.svg' %}" class="logo" alt="Logo Mango">
     </a>
     <h1 class="Glacial">Mi tienda</h1>
-
+    <div>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 </header>
 <nav>
     <input class="topnav" type="text" name="busqueda" id="busqueda" placeholder="Buscar productos..">
@@ -68,20 +76,20 @@
         </div>
     </div>
     {% for producto in productos %}
-        <article class="flex-item" id="{{producto.titulo}}">
-            <!-- aca hay que poner la imagen -->
-            <a href="{{producto.foto1.url}}">
-                <!-- y aca -->
-                <img src="{{producto.foto1.url}}" alt="Imagen de producto">
-                <header class="image-header">
-                    <h2 class="image-title1">{{producto.titulo}}</h2>
-                </header>
-                <footer class="image-info">
-                    <h2 class="image-title2">{{producto.descripcion}}</h2>
-                    <p class="image-description">ლ{{producto.precio}}</p>
-                </footer>
-            </a>
-        </article>
+    <article class="flex-item" id="{{producto.titulo}}">
+        <!-- aca hay que poner la imagen -->
+        <a href="{{producto.foto1.url}}">
+            <!-- y aca -->
+            <img src="{{producto.foto1.url}}" alt="Imagen de producto">
+            <header class="image-header">
+                <h2 class="image-title1">{{producto.titulo}}</h2>
+            </header>
+            <footer class="image-info">
+                <h2 class="image-title2">{{producto.descripcion}}</h2>
+                <p class="image-description">ლ{{producto.precio}}</p>
+            </footer>
+        </a>
+    </article>
     {% endfor %}
 </section>
 {%endblock%}

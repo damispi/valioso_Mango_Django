@@ -91,6 +91,13 @@ header {
   align-items: center;
   height: 16vw;
   padding: 10px;
+  justify-content: space-between;
+}
+.error:hover{
+  cursor: default;
+}
+.error:active {
+  scale:unset;
 }
 
 
@@ -318,6 +325,7 @@ form {
   margin: 0;
   flex-grow: 1;
 }
+
 
 .image-description {
   font-size: 1.4em;

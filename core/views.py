@@ -8,6 +8,7 @@ from django.http import JsonResponse, HttpResponse
 
 
 def inicio(request):
+    request.session.flush()
     return render(request, "core/pages/get_size.html")
 
 
@@ -19,11 +20,10 @@ def ingreso(request):
     request.session.flush()
     if request.method == "POST":
         nombre_usuario = request.POST.get("nombreusuario")
-        contraseña = request.POST.get("contraseña")
-        usuario = Usuario.objects.filter(
+        contraseña = hash(request.POST.get("contraseña"))
+        usuario = Usuario.objects.get(
             nombre_usuario=nombre_usuario, contraseña=contraseña
-        ).first()
-
+        )
         if usuario:
             request.session["id_usuario"] = usuario.pk
             return redirect("mi_tienda")
@@ -34,7 +34,6 @@ def ingreso(request):
                 "core/pages/form_ingreso.html",
                 {"mensaje_error": mensaje_error},
             )
-
     return render(request, "core/pages/form_ingreso.html")
 
 
@@ -42,7 +41,7 @@ def registro(request):
     if request.method == "POST":
         # datos del formulario
         nombre_usuario = request.POST.get("nombreusuario")
-        contraseña = request.POST.get("pass")
+        contraseña = hash(request.POST.get("pass"))
 
         if Usuario.objects.filter(nombre_usuario=nombre_usuario).exists():
             messages.error(
@@ -95,6 +94,12 @@ def mi_tienda(request):
 
                 producto_editado.save()
         if "agregar-producto" in request.POST:
+            if Producto.objects.filter(titulo=agregar_form.data["titulo"]).exists():
+                messages.error(
+                    request,
+                    "Ya tienes un producto con ese nombre. Por favor, elige otro.",
+                )
+                return redirect("mi_tienda")
             if agregar_form.is_valid():
                 usuario_prod = Usuario.objects.get(pk=request.session["id_usuario"])
                 titulo = agregar_form.cleaned_data["titulo"]
@@ -161,34 +166,32 @@ def get_productos(request, filter):
         titulo = str(producto.titulo)
         desc = str(producto.descripcion)
         precio = str(producto.precio)
-        links=[]
+        links = []
         links.append(f"{(hash(str(producto.pk)))}_1")
         if producto.foto2:
             links.append(f"{(hash(str(producto.pk)))}_2")
             if producto.foto3:
                 links.append(f"{(hash(str(producto.pk)))}_3")
-        prod = {"titulo": titulo, "precio": precio, "descripcion": desc,"links": links}
+        prod = {"titulo": titulo, "precio": precio, "descripcion": desc, "links": links}
         res.append(prod)
 
     return JsonResponse({"res": res})
 
-def get_image(request, code,foto):
+
+def get_image(request, code, foto):
     for producto in Producto.objects.all():
-        prod=producto.foto1
-        pk=hash(str(producto.pk))
-        if int(code)==pk and foto==1:
-            prod=producto.foto1
+        prod = producto.foto1
+        pk = hash(str(producto.pk))
+        if int(code) == pk and foto == 1:
+            prod = producto.foto1
             break
-        elif int(code)==pk and foto==2:
-            prod=producto.foto2
+        elif int(code) == pk and foto == 2:
+            prod = producto.foto2
             break
-        elif int(code)==pk and foto==3:
-            prod=producto.foto3
+        elif int(code) == pk and foto == 3:
+            prod = producto.foto3
             break
-    if prod:    
+    if prod:
         return HttpResponse(prod, content_type="image/jpeg")
     else:
-        return HttpResponse('')
-    
-
-        
+        return HttpResponse("")
