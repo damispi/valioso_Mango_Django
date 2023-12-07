@@ -35,18 +35,16 @@ function dibujar(arts) {
             let a = document.createElement('a');
             a.id = `art${i}`;
             article.appendChild(a);
-            a.addEventListener('click', (e) => { 
-                
-                for (let j=1;j<arts[i].links[0].length;j++){
-                    if (arts[i].imgs.length==1){
-                        fetch(arts[i].links[0][j]).then(x=>{
+            a.addEventListener('click', (e) => {
+
+                for (let j = 1; j < arts[i].links[0].length; j++) {
+                    if (arts[i].imgs.length == 1) {
+                        fetch(arts[i].links[0][j]).then(x => {
                             arts[i].imgs.push(x.url);
-                            console.log(arts[i])
                         })
                     }
                 }
-                
-                console.log(arts[i])
+
                 let modal = document.createElement('div');
                 let main = document.querySelector('main')
                 modal.classList.add('modal');
@@ -61,6 +59,11 @@ function dibujar(arts) {
             <p> ${arts[i].descripcion} </p>
         </div>`
                 main.appendChild(modal);
+                if (arts[i].links[0].length>1){
+                    document.getElementById('right').classList.toggle('activo',true);
+                }
+                document.getElementById('right').addEventListener('click', (e) => { pasarImagen(e, 'right', arts[i].imgs) });
+                document.getElementById('left').addEventListener('click', (e) => { pasarImagen(e, 'left', arts[i].imgs) });
                 window.addEventListener('click', (event) => {
                     if (event.target == modal) {
                         main.removeChild(modal)
@@ -82,6 +85,43 @@ function dibujar(arts) {
             box.appendChild(article);
         }
     }
+}
+function pasarImagen(e, direccion, imgs) {
+    let foto;
+    let char;
+    if (direccion == 'right') {
+        foto = e.target.previousElementSibling;
+        char = foto.src.charAt(foto.src.length - 1);
+        if(parseInt(char)<imgs.length){
+            foto.src = foto.src.slice(0, -1) + '' + (parseInt(char) + 1);
+            document.getElementById('left').classList.toggle('activo',true);
+            console.log(foto.src)
+        }
+        if(parseInt(char)+1==imgs.length){
+            document.getElementById(direccion).classList.toggle('activo', false);
+        }
+
+
+        // for (let i = 0; i < imgs.length - 1; i++) {
+        //     if (foto.src == imgs[i]) {
+        //         foto.src = imgs[i + 1];
+        //         console.log(foto.src)
+        //         break;
+        //     }
+        // }
+    } else {
+        foto = e.target.nextElementSibling;
+        char = foto.src.charAt(foto.src.length - 1);
+        if (parseInt(char) > 1) {
+            foto.src = foto.src.slice(0, -1) + '' + (parseInt(char) - 1);
+            document.getElementById('right').classList.toggle('activo', true);
+            console.log(foto.src)
+        } 
+        if(parseInt(char)==2) {
+            document.getElementById(direccion).classList.toggle('activo', false);
+        }
+    }
+    // console.log(e.target)
 }
 
 const busqueda = document.getElementById('busqueda');

@@ -594,14 +594,26 @@ main {
     flex-direction: column;
     /* Could be more or less, depending on screen size */
 }
+.product-image img{
+    width: 80%;
+}
 
 #left,#right{
     margin: auto 5px;
+    font-size: 4em;
+}
+#left:not(.activo),#right:not(.activo){
+    color: #777;
+}
+.activo:hover{
+    cursor: pointer;
+    color: #4D9906;
 }
 
 .product-image{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .product-image p{
@@ -618,9 +630,11 @@ main {
 /* The Close Button */
 .close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
+    display: inline;
+    align-self: end;
+    margin: auto 15px;
 }
 .close:hover,
 .close:focus {
