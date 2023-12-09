@@ -16,4 +16,5 @@ urlpatterns = [
     path("mi_tienda", views.mi_tienda, name="mi_tienda"),
     path("get_productos_<str:filter>", views.get_productos, name="get_productos"),
     path("<str:code>_<int:foto>", views.get_image, name="get_image"),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("<int:user>_get_usuario", views.get_usuario, name="get_usuario"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

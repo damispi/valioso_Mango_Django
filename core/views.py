@@ -18,22 +18,25 @@ def como_funciona(request):
 
 def ingreso(request):
     request.session.flush()
+
     if request.method == "POST":
         nombre_usuario = request.POST.get("nombreusuario")
         contraseña = hash(request.POST.get("contraseña"))
-        usuario = Usuario.objects.get(
-            nombre_usuario=nombre_usuario, contraseña=contraseña
-        )
-        if usuario:
+
+        try:
+            usuario = Usuario.objects.get(
+                nombre_usuario=nombre_usuario, contraseña=contraseña
+            )
             request.session["id_usuario"] = usuario.pk
             return redirect("mi_tienda")
-        else:
+        except Usuario.DoesNotExist:
             mensaje_error = "Nombre de usuario o contraseña incorrectos."
             return render(
                 request,
                 "core/pages/form_ingreso.html",
                 {"mensaje_error": mensaje_error},
             )
+
     return render(request, "core/pages/form_ingreso.html")
 
 
@@ -168,13 +171,19 @@ def get_productos(request, filter):
         precio = str(producto.precio)
         links = []
         links.append(f"{(hash(str(producto.pk)))}_1")
+        id = producto.usuario_prod.pk
         if producto.foto2:
             links.append(f"{(hash(str(producto.pk)))}_2")
             if producto.foto3:
                 links.append(f"{(hash(str(producto.pk)))}_3")
-        prod = {"titulo": titulo, "precio": precio, "descripcion": desc, "links": links}
+        prod = {
+            "titulo": titulo,
+            "precio": precio,
+            "descripcion": desc,
+            "links": links,
+            "id": id,
+        }
         res.append(prod)
-
     return JsonResponse({"res": res})
 
 
@@ -195,3 +204,10 @@ def get_image(request, code, foto):
         return HttpResponse(prod, content_type="image/jpeg")
     else:
         return HttpResponse("")
+
+
+def get_usuario(request, user):
+
+    usuario = Usuario.objects.get(pk=int(user))
+    res = [usuario.nombre_usuario, usuario.mail]
+    return JsonResponse({"usuario": res})

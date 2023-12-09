@@ -6,12 +6,14 @@ class Articulo {
     titulo;
     descripcion;
     precio;
-    constructor(imgs, links, titulo, descripcion, precio) {
+    id;
+    constructor(imgs, links, titulo, descripcion, precio,id) {
         this.imgs = imgs;
         this.links = links;
         this.descripcion = descripcion;
         this.titulo = titulo;
         this.precio = precio;
+        this.id=id;
     }
 }
 
@@ -46,18 +48,28 @@ function dibujar(arts) {
                 }
 
                 let modal = document.createElement('div');
-                let main = document.querySelector('main')
+                let main = document.querySelector('main');
                 modal.classList.add('modal');
-                modal.innerHTML = `<div class="modal-content">
-            <span class="close">&times;</span>
-            <p> ${arts[i].titulo} </p>
-            <section class='product-image'>
-                <a id='left'> < </a>
-                <img src='${arts[i].imgs[0]}'>
-                <a id='right'> > </a>
-            </section>
-            <p> ${arts[i].descripcion} </p>
-        </div>`
+                modal.innerHTML = 
+                `<div id="modal-art" class="modal-content">
+                    <span class="close">&times;</span>
+                    <p> ${arts[i].titulo} </p>
+                    <section class='product-image'>
+                        <a id='left'> < </a>
+                            <img src='${arts[i].imgs[0]}'>
+                        <a id='right'> > </a>
+                    </section>
+                    <p> ${arts[i].descripcion} </p>
+                </div>`
+                fetch(`${arts[i].id}_get_usuario`).then(response=>response.text()).then(result=>{
+                    let user=JSON.parse(result).usuario
+                    let usuario = document.createElement('p');
+                    usuario.innerHTML = `<p> Usuario: ${user[0]} </p>`;
+                    let contacto = document.createElement('p');
+                    contacto.innerHTML = `<p> Contacto: ${user[1]} </p>`
+                    document.getElementById('modal-art').appendChild(usuario);
+                    document.getElementById('modal-art').appendChild(contacto);
+                })
                 main.appendChild(modal);
                 if (arts[i].links[0].length>1){
                     document.getElementById('right').classList.toggle('activo',true);
@@ -95,20 +107,13 @@ function pasarImagen(e, direccion, imgs) {
         if(parseInt(char)<imgs.length){
             foto.src = foto.src.slice(0, -1) + '' + (parseInt(char) + 1);
             document.getElementById('left').classList.toggle('activo',true);
-            console.log(foto.src)
         }
         if(parseInt(char)+1==imgs.length){
             document.getElementById(direccion).classList.toggle('activo', false);
         }
 
 
-        // for (let i = 0; i < imgs.length - 1; i++) {
-        //     if (foto.src == imgs[i]) {
-        //         foto.src = imgs[i + 1];
-        //         console.log(foto.src)
-        //         break;
-        //     }
-        // }
+        
     } else {
         foto = e.target.nextElementSibling;
         char = foto.src.charAt(foto.src.length - 1);
@@ -121,7 +126,6 @@ function pasarImagen(e, direccion, imgs) {
             document.getElementById(direccion).classList.toggle('activo', false);
         }
     }
-    // console.log(e.target)
 }
 
 const busqueda = document.getElementById('busqueda');
@@ -136,7 +140,8 @@ busqueda.addEventListener('keydown', (e) => {
             fetch(`get_productos_${busqueda.value}`).then(response => response.text()).then(result => {
                 let res = JSON.parse(result).res;
                 for (let i = 0; i < res.length; i++) {
-                    let art = new Articulo([], [res[i].links], res[i].titulo, res[i].descripcion, res[i].precio);
+                    let art = new Articulo([], [res[i].links], res[i].titulo, res[i].descripcion, res[i].precio, res[i].id);
+                    
                     fetch(res[i].links[0]).then(result => {
                         art.imgs.push(result.url)
                     }).then(x => {
