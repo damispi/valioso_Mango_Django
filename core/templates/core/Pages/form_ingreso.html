@@ -20,8 +20,12 @@
 </style>
 <form method="post" action="{% url 'ingreso' %}">
     {% csrf_token %}
-    {% if mensaje_error %}
-    <p class="caja">{{ mensaje_error }}</p>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
     {% endif %}
     <label for="nombre">Nombre de Usuario:</label>
     <input type="text" name="nombreusuario" id="nombreusuario" required>

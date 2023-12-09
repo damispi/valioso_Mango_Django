@@ -5,6 +5,7 @@ from .forms import AgregarProductoForm, EliminarProductoForm
 from .forms import EditarProdcutoForm
 from django.contrib import messages
 import re
+import hashlib
 from django.http import JsonResponse, HttpResponse
 
 
@@ -22,22 +23,22 @@ def ingreso(request):
 
     if request.method == "POST":
         nombre_usuario = request.POST.get("nombreusuario")
-        contraseña = hash(request.POST.get("contraseña"))
-
-        try:
-            usuario = Usuario.objects.get(
-                nombre_usuario=nombre_usuario, contraseña=contraseña
-            )
-            request.session["id_usuario"] = usuario.pk
-            return redirect("mi_tienda")
-        except Usuario.DoesNotExist:
-            mensaje_error = "Nombre de usuario o contraseña incorrectos."
+        passw = request.POST.get("contraseña")
+        contraseña = hashlib.sha256(passw.encode("utf-8")).hexdigest()
+        if not Usuario.objects.filter(
+            nombre_usuario=nombre_usuario, contraseña=contraseña            
+            ).exists():
+            messages.error(request,"Nombre de usuario o contraseña incorrectos.")
             return render(
                 request,
-                "core/pages/form_ingreso.html",
-                {"mensaje_error": mensaje_error},
-            )
-
+                "core/pages/form_ingreso.html",                
+                )
+        else:
+            usuario = Usuario.objects.get(
+                nombre_usuario=nombre_usuario, contraseña=contraseña                
+                )
+            request.session["id_usuario"] = usuario.pk
+            return redirect("mi_tienda")
     return render(request, "core/pages/form_ingreso.html")
 
 
@@ -45,7 +46,8 @@ def registro(request):
     if request.method == "POST":
         # datos del formulario
         nombre_usuario = request.POST.get("nombreusuario")
-        contraseña = hash(request.POST.get("pass"))
+        passw = request.POST.get("pass")
+        contraseña = hashlib.sha256(passw.encode("utf-8")).hexdigest()
 
         if Usuario.objects.filter(nombre_usuario=nombre_usuario).exists():
             messages.error(

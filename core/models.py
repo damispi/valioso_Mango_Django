@@ -5,7 +5,7 @@ import os
 
 class Usuario(models.Model):
     nombre_usuario = models.CharField(max_length=50, unique=True)
-    contraseña = models.CharField(max_length=50)
+    contraseña = models.CharField(max_length=100)
     apellido = models.CharField(max_length=50, null=True, blank=True)
     nombre = models.CharField(max_length=50, null=True, blank=True)
     fnac = models.DateField()
