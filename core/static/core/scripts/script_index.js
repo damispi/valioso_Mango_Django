@@ -120,7 +120,6 @@ function pasarImagen(e, direccion, imgs) {
         if (parseInt(char) > 1) {
             foto.src = foto.src.slice(0, -1) + '' + (parseInt(char) - 1);
             document.getElementById('right').classList.toggle('activo', true);
-            console.log(foto.src)
         } 
         if(parseInt(char)==2) {
             document.getElementById(direccion).classList.toggle('activo', false);

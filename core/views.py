@@ -4,6 +4,7 @@ from .models import Usuario, Producto
 from .forms import AgregarProductoForm, EliminarProductoForm
 from .forms import EditarProdcutoForm
 from django.contrib import messages
+import re
 from django.http import JsonResponse, HttpResponse
 
 
@@ -50,6 +51,12 @@ def registro(request):
             messages.error(
                 request, "El nombre de usuario ya está en uso. Por favor, elige otro."
             )
+            return redirect("registro")
+        if Usuario.objects.filter(mail=request.POST.get("correo")).exists():
+            messages.error(request, "Ese correo ya esta en uso")
+            return redirect("registro")
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", request.POST.get("correo")):
+            messages.error(request, "Ingrese un email")
             return redirect("registro")
 
         nuevo_usuario = Usuario(
@@ -207,7 +214,6 @@ def get_image(request, code, foto):
 
 
 def get_usuario(request, user):
-
     usuario = Usuario.objects.get(pk=int(user))
     res = [usuario.nombre_usuario, usuario.mail]
     return JsonResponse({"usuario": res})

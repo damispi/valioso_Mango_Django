@@ -15,17 +15,18 @@
 
 <form  action="{% url 'registro' %}" method="post">
     {% csrf_token %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
     <label for="nombreusuario">Nombre de Usuario:</label>
     <input type="text" name="nombreusuario"  minlength="7" id="nombre" required>
     <label for="pass">Contraseña:</label>
     <input type="password" name="pass" placeholder=""minlength="7" id="pass" required>
-    {% if messages %}
-        <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+    
     
     
     <dialog id="dialog">
