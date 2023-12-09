@@ -53,7 +53,7 @@ function dibujar(arts) {
                 modal.innerHTML = 
                 `<div id="modal-art" class="modal-content">
                     <span class="close">&times;</span>
-                    <p> ${arts[i].titulo} </p>
+                    <h2> ${arts[i].titulo} </h2>
                     <section class='product-image'>
                         <a id='left'> < </a>
                             <img src='${arts[i].imgs[0]}'>
@@ -63,10 +63,14 @@ function dibujar(arts) {
                 </div>`
                 fetch(`${arts[i].id}_get_usuario`).then(response=>response.text()).then(result=>{
                     let user=JSON.parse(result).usuario
-                    let usuario = document.createElement('p');
-                    usuario.innerHTML = `<p> Usuario: ${user[0]} </p>`;
-                    let contacto = document.createElement('p');
-                    contacto.innerHTML = `<p> Contacto: ${user[1]} </p>`
+                    let usuario = document.createElement('a');
+                    usuario.innerHTML = `Usuario: ${user[0]}`;
+                    let contacto = document.createElement('a');
+                    contacto.href = `${user[1]}`
+                    contacto.innerHTML = `Contacto: ${user[1]}`;
+                    contacto.addEventListener('click',(e)=>{copyURI(e)})
+                    contacto.style.textDecoration='none';
+                    contacto.style.color='white'
                     document.getElementById('modal-art').appendChild(usuario);
                     document.getElementById('modal-art').appendChild(contacto);
                 })
@@ -97,6 +101,10 @@ function dibujar(arts) {
             box.appendChild(article);
         }
     }
+}
+function copyURI(evt) {
+    evt.preventDefault();
+    navigator.clipboard.writeText(evt.target.getAttribute('href'))
 }
 function pasarImagen(e, direccion, imgs) {
     let foto;
