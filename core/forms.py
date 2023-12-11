@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario, Producto
+from .models import Producto
 
 
 class AgregarProductoForm(forms.ModelForm):
