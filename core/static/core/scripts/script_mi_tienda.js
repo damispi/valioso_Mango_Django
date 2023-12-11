@@ -70,7 +70,27 @@ document.querySelector('#boton-salir').addEventListener('click', () => {
 })
 
 
+let busqueda =document.querySelector('#busqueda');
+busqueda.addEventListener('input',(e)=>{
+    console.log(busqueda.value)
+    let articulos = document.querySelectorAll('.flex-item');
+    if (busqueda.value.length == 0){
+        for(let i=0;i<articulos.length;i++){
+            articulos[i].style.display='block';
+        }
+    }else{
+        for (let i = 0; i < articulos.length; i++){
+            if(articulos[i].id.toLowerCase().includes(busqueda.value.toLowerCase())){
+                articulos[i].style.display='block'
+            }else{
+                articulos[i].style.display = 'none'
+            }
+        }
+    }
+})
+
 document.addEventListener('DOMContentLoaded',()=>{
+    busqueda.focus();
     let fotos1 = document.querySelectorAll('#id_foto1')
     let fotos2=[];
     let fotos3=[];

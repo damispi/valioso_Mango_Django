@@ -18,7 +18,9 @@ class Articulo {
 }
 
 
-
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('busqueda').focus()
+})
 
 // var art1 = new Articulo("Sources/Bici2.jpeg", "Bicicleta rodado 26", "Casi nueva", "126");
 // var art2 = new Articulo("Sources/tv.jpg", "Tv 32 pulgadas", "Usada, en buen estado", "150");
